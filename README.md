@@ -2,11 +2,11 @@ eashin的个人博客，持续完善丰富博客各项功能。
 
 # sudoblog
 
-#### 相关链接
-博客： https://blog.sudophp.com/
+## 相关链接
+博客： https://blog.sudophp.com/  
 介绍： [开源博客项目基于thinkphp5](http://blog.sudophp.com/sudoblog)
 
-#### 介绍
+## 介绍
 急于整出[博客](https://blog.sudophp.com/)并上线，所以将以前基于thinkphp开发的简易项目搬过来，进行前后端的初步优化。
 当前博客暂时以文章模块为主，不过易于二次开发扩展；设置了路由简化前台文章和列表的访问链接，实现seo友好的链接结构；后台模板是hui和layui（未实现手机端自适应），前端是买的一个模板套上去。更多功能持续完善中
 下一步实现免登陆评论和评论管理，pv/uv和文章浏览数，单页模板管理等（ps：其他如微信扫码登陆，公众号验证码，邮箱功能等）
@@ -17,7 +17,7 @@ eashin的个人博客，持续完善丰富博客各项功能。
 ![sudoblog后台文章分类](http://blog.sudophp.com/static/images/screenshot/breath_category.png)  
 
 
-#### 第一版的目录结构
+## 第一版的目录结构
 ~~~
 www  WEB部署目录（或者子目录）
 ├─application           应用目录
@@ -30,8 +30,6 @@ www  WEB部署目录（或者子目录）
 │  │  └─config.php      模块配置文件
 │  ├─api                接口模块目录
 │  │  └─controller      控制器目录
-│  ├─common             公共模块目录
-│  │  └─lib             公共类库目录
 │  ├─extra              其他配置目录
 │  ├─index              前台模块目录
 │  │  ├─controller      控制器目录
@@ -56,10 +54,27 @@ www  WEB部署目录（或者子目录）
 ├─public                WEB目录（对外访问目录）
 │  ├─_mystorage         自定义的临时缓存目录
 │  ├─lib                前端扩展存放目录
+│  ├─static             静态资源目录
+│  │  ├─admin           后台静态资源目录
+│  │  ├─web             前台静态资源目录
+│  │  │  └─breath       前台某个模板（eg:breath）资源目录
+│  │  └─images          图片目录
 │  ├─template           前台模板备份目录
 │  ├─upload             上传目录
 │  ├─index.php          入口文件
 │  └─.htaccess          用于apache的重写
+│
+├─template              模板目录
+│  ├─web                前台模板目录
+│  │  ├─breath          前台某个模板（eg:breath）目录
+│  │  │  ├─404.html     404模板文件
+│  │  │  ├─detail.html  文章详情模板文件
+│  │  │  ├─footer.html  公共底部模板文件
+│  │  │  ├─header.html  公共头部模板文件
+│  │  │  ├─index.html   首页模板文件
+│  │  │  └─list.html    列表模板文件
+│  │  └─index.html      前台模板布局文件
+│  └─admin              后台模板目录
 │
 ├─thinkphp              框架系统目录
 ├─runtime               应用的运行时目录（可写，可定制）
@@ -72,25 +87,27 @@ www  WEB部署目录（或者子目录）
 ~~~
 
 
-#### 安装教程
+## 安装教程
 
 1. git clone https://gitee.com/ashin1206293024_admin/sudoblog.git 把项目拉下来；
-2. 后台登录默认为admin 123456；
-3. 需要开启mod_rewrite；
-4. 添加后台模板到/template/web/xxx/,静态资源放到/public/static/web/xxx/下（xxx为前端模板的名称，模板文件命名参考上述目录结构）
+2. composer install
+3. 后台登录默认为admin 123456；
+4. 需要开启mod_rewrite；
+5. 添加后台模板到/template/web/xxx/,静态资源放到/public/static/web/xxx/下（xxx为前端模板的名称，模板文件命名参考上述目录结构）
 
-#### 链接结构说明
+## 链接结构说明
 
 1.后台  
 隐藏路由文件，默认/admin即可完成访问，链接规则：http://blog.sudophp/admin/index/welcome.html  
 为tp5的默认url规则，[学习-tp5的url访问](https://www.kancloud.cn/manual/thinkphp5/118012)  
+
 2.前台  
 首页: http://blog.sudophp.com  （第二页 http://blog.sudophp.com/2 ...）  
 文章分类列表: http://blog.sudophp.com/php （第二页 http://blog.sudophp.com/php/2 ...）  
 文章详情页 http://blog.sudophp.com/php/what-is-php.html  
-...以上路由规则见：application/route.php...  
+（ps: 以上路由规则见：application/route.php）  
 
-#### 项目介绍
+## 项目介绍
 
 已完成部分：
 - [x] 前台模板基于boostrap的响应式页面布局适配手机和平板
@@ -110,14 +127,14 @@ www  WEB部署目录（或者子目录）
 - [ ] 公众号验证码
 - [ ] 邮箱功能
 
-#### 致谢
+## 致谢
 
-[thinkphp5](http://www.thinkphp.cn/) http://www.thinkphp.cn/  
-[jquery](https://jquery.com/) https://jquery.com/  
-[layui](https://www.layui.com/) https://www.layui.com/  
-[h-ui](http://www.h-ui.net/) http://www.h-ui.net/  
+thinkphp5: http://www.thinkphp.cn/  
+jquery: https://jquery.com/  
+layui: https://www.layui.com/  
+h-ui: http://www.h-ui.net/  
 
-小的会抱紧各位大佬的大腿，不足之处敬请指正，不断去完善改进sudoblog。(by Eashin)  
+本博客不足之处敬请指正，小弟抱紧各位大佬的大腿，不断去完善改进sudoblog。(by Eashin)  
 偶会一直成长滴。(by Sudoblog)  
 
 
