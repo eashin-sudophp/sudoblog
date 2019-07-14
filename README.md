@@ -81,14 +81,14 @@ www  WEB部署目录（或者子目录）
 
 #### 链接结构说明
 
-1.后台
-隐藏路由文件，默认/admin即可完成访问，链接规则：http://blog.sudophp/admin/index/welcome.html
-为tp5的默认url规则，[学习-tp5的url访问](https://www.kancloud.cn/manual/thinkphp5/118012)
-2.前台
-首页: http://blog.sudophp.com  （第二页 http://blog.sudophp.com/2 ...）
-文章分类列表: http://blog.sudophp.com/php （第二页 http://blog.sudophp.com/php/2 ...）
-文章详情页 http://blog.sudophp.com/php/what-is-php.html
-...以上路由规则见：application/route.php...
+1.后台  
+隐藏路由文件，默认/admin即可完成访问，链接规则：http://blog.sudophp/admin/index/welcome.html  
+为tp5的默认url规则，[学习-tp5的url访问](https://www.kancloud.cn/manual/thinkphp5/118012)  
+2.前台  
+首页: http://blog.sudophp.com  （第二页 http://blog.sudophp.com/2 ...）  
+文章分类列表: http://blog.sudophp.com/php （第二页 http://blog.sudophp.com/php/2 ...）  
+文章详情页 http://blog.sudophp.com/php/what-is-php.html  
+...以上路由规则见：application/route.php...  
 
 #### 项目介绍
 
@@ -112,12 +112,12 @@ www  WEB部署目录（或者子目录）
 
 #### 致谢
 
-[thinkphp5](http://www.thinkphp.cn/) http://www.thinkphp.cn/
-[jquery](https://jquery.com/) https://jquery.com/
-[layui](https://www.layui.com/) https://www.layui.com/
-[h-ui](http://www.h-ui.net/) http://www.h-ui.net/
+[thinkphp5](http://www.thinkphp.cn/) http://www.thinkphp.cn/  
+[jquery](https://jquery.com/) https://jquery.com/  
+[layui](https://www.layui.com/) https://www.layui.com/  
+[h-ui](http://www.h-ui.net/) http://www.h-ui.net/  
 
-小的会抱紧各位大佬的大腿，不足之处敬请指正，不断去完善改进sudoblog。(by Eashin)
-偶会一直成长滴。(by Sudoblog)
+小的会抱紧各位大佬的大腿，不足之处敬请指正，不断去完善改进sudoblog。(by Eashin)  
+偶会一直成长滴。(by Sudoblog)  
 
 
