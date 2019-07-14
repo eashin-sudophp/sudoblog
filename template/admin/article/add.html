@@ -1,0 +1,128 @@
+</head>
+<body>
+<nav class="breadcrumb">
+	<i class="Hui-iconfont Hui-iconfont-fenlei"></i> <a href="javascript:parent.layer.closeAll()"> <empty name='row'>{:lang('ARTICLE_ADD')}<else/>{:lang('ARTICLE_EDIT')}</empty></a>
+</nav>
+<article class="page-container">
+	<form action="<empty name='row'>{:url('Article/addPost')}<else/>{:url('Article/editPost')}</empty>" method="post" class="form form-horizontal js-ajax-form layui-form">
+		<input type="hidden" name="draft"/>
+		<input type="hidden" name="auto_hold"/>
+		<input type="hidden" name="permission"/>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2"><span class="c-red">*</span>{:lang('ARTICLE_TITLE')}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<input type="text" class="layui-input" value="{$row.title|default=''}" name="title" placeholder="title">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang('BRIEF_TITLE')}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<input type="text" class="layui-input" value="{$row.brief_title|default=''}"  name="brief_title" placeholder="brief_title">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2"><span class="c-red">*</span>{:lang('CLASSIFIED_COLUMN')}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<select name="cate_id" class="select">
+					<option value="">{:lang('SELECT_CATEGORY')}</option>
+					<foreach name="cates" item="cate">
+						<option value="{$cate.id}" <if condition="isset($row['cate_id']) AND isset($cate['id']) AND $row['cate_id'] eq $cate['id']">selected</if>><gt name="cate.level" value="0">|{$cate.level|str_repeat='—',###}</gt>{$cate.cate_name}</option>
+					</foreach>
+				</select>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang('VIEW_TIMES')}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<input type="text" class="layui-input" value="{$row.view_times|default=''}" name="view_times" placeholder="view_times">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang('KEYWORD')}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<input type="text" class="layui-input" value="{$row.keyword|default=''}" name="keyword" placeholder="keyword">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang('DESCRIPTION')}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<textarea name="summary" class="layui-textarea" maxlength="200" placeholder="summary" onKeyUp="$(this).next().find('em').html(this.value.length)">{$row.summary|default=''}</textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">{$row.summary|default=''|mb_strlen}</em>/200</p>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("DESCRIPTION_SHOW_BEFORE_ARTICLE")}</label>
+			<div class="formControls col-xs-8 col-sm-7 skin-minimal">
+				<input type="checkbox" name="summary_show" value="1" lay-skin="switch" <if condition="!isset($row.summary_show) OR $row.summary_show == 0">checked</if> lay-text="ON|OFF">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang('SOURCE')}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<input type="text" class="layui-input" value="{$row.source|default=''}" name="source" placeholder="source">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("ALLOWANCE_REMARK")}</label>
+			<div class="formControls col-xs-8 col-sm-7 skin-minimal">
+				<input type="checkbox" name="comment_auth" value="1" lay-skin="switch" lay-filter="check-comment" <if condition="!isset($row.comment_auth) OR $row.comment_auth == 1">checked</if> lay-text="ON|OFF">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang('CAN_REMARK_TIME')}</label>
+			<div class="formControls col-xs-8 col-sm-10">
+				<input type="text" onfocus="selecttime(1, 1)" name="comment_start" value="<notempty name='row.comment_start'>{$row.comment_start|date='Y-m-d', ###}</notempty>" class="layui-input Wdate Wtime line-block" <if condition="isset($row.comment_auth) AND $row.comment_auth == 0">placeholder="{lang('CANNOT_INPUT')}"</if>>
+				{:lang('TO')}
+				<input type="text" onfocus="selecttime(2, 1)" name="comment_end" value="<notempty name='row.comment_end'>{$row.comment_end|date='Y-m-d', ###}</notempty>" class="layui-input Wdate Wtime line-block" <if condition="isset($row.comment_auth) AND $row.comment_auth == 0">placeholder="{lang('CANNOT_INPUT')}"</if>>
+				<span class="layui-word-aux">{:lang('CAN_REMARK_TIME_TIPS')}</span>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang('ARTICLE_OPEN_TIME')}</label>
+			<div class="formControls col-xs-8 col-sm-10">
+				<input type="text" onfocus="selecttime(1, 1)" name="open_time" value="<notempty name='row.open_time'>{$row.open_time|date='Y-m-d', ###}</notempty>" class="layui-input Wdate Wtime line-block"> {:lang('TO')}
+				<input type="text" onfocus="selecttime(2, 1)" name="close_time" value="<notempty name='row.close_time'>{$row.close_time|date='Y-m-d', ###}</notempty>" class="layui-input Wdate Wtime line-block">
+				<span class="layui-word-aux">{:lang('ARTICLE_OPEN_TIME_TIPS')}</span>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang('THUMBNAIL')}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<div class="layui-upload">
+					<input type="button" class="layui-btn" value="{:lang('UPLOAD_IMAGE')}" id="upload_element"/>
+					<input type="hidden" name="thumbnail" value="{$row.thumbnail|default=''}" />
+					<blockquote class="layui-elem-quote layui-quote-nm layui-upload-list" style="overflow: hidden;">
+					    <div class="layui-word-aux">{:lang('PREVIEW_IMAGE')}</div>
+					    <img class="layui-upload-img" id="show_img" src="{$row.thumbnail|default=''}">
+					</blockquote>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang('ARTICLE_CONTENT')}</label>
+			<div class="formControls col-xs-8 col-sm-10">
+				<textarea id="ueditor" name="content">{$row.content|default=''}</textarea>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("ARTICLE_PROPERTY")}</label>
+			<div class="formControls col-xs-8 col-sm-7" style="padding-top: 4px;">
+				<input type="checkbox" name="private" title="{:lang('PRIVATE_ARTICLE')}" value="1">
+				<span class="layui-word-aux">{:lang('DRAFT_WITHOUT_PROPERTY_PRIVATE')}</span>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-7 col-xs-offset-4 col-sm-offset-2">
+				<input type="hidden" name="id" value="{$row.id|default=''}" />
+				<button class="layui-btn layui-btn-normal js-ajax-submit-draft"> {:lang('DEPOSIT_TO_DRAFT')}</button>
+				<button class="layui-btn normal js-ajax-submit" type="submit">{:lang('DEPOSIT_AND_PUBLISH')}</button>
+				<button class="layui-btn layui-btn-primary" type="reset">{:lang('RESET')}</button>
+			</div>
+		</div>
+	</form>
+	<span class="layui-word-aux auto_hold_tips"></span>
+</article>
+<script type="text/javascript" src="__LIB__/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="__LIB__/ueditor/1.4.3/ueditor.config.js"></script>
+<script type="text/javascript" src="__LIB__/ueditor/1.4.3/ueditor.all.min.js"> </script>
+<script type="text/javascript" src="__LIB__/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>

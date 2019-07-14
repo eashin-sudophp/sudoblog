@@ -1,0 +1,7 @@
+<nav class="breadcrumb">
+	<i class="Hui-iconfont Hui-iconfont-home"></i> <a href="javascript:parent.location.reload()">{:lang('HOME')}</a>
+	<foreach name="breadcrumb" item="vo">
+		<span class="c-gray en">&gt;</span> <a href="javascript:;">{$vo}</a>
+	</foreach>
+	<button class="layui-btn layui-btn-sm layui-btn-normal layui-btn-radius r mt-5" onclick="window.location.replace('{:url($cur_page)}');" title="{:lang('REFRESH')}" ><i class="Hui-iconfont">&#xe68f;</i></button>
+</nav>

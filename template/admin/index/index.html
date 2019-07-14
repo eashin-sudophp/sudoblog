@@ -1,0 +1,160 @@
+</head>
+<body>
+<header class="navbar-wrapper">
+	<div class="navbar navbar-fixed-top">
+		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/admin">{:lang('ADMIN_CENTER')}</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H-ui</a>
+			<span class="logo navbar-slogan f-l mr-10 hidden-xs">
+				<a class="logo navbar-logo f-l mr-10 hidden-xs" href="/">[{:lang('WEBSITE_HOME_PAGE')}]</a>
+			</span>
+			<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
+			<nav class="nav navbar-nav">
+				<ul class="cl">
+					<li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a href="javascript:;"><i class="Hui-iconfont">&#xe616;</i> 文章</a></li>
+							<li><a href="javascript:;"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li>
+							<li><a href="javascript:;"><i class="Hui-iconfont">&#xe620;</i> 产品</a></li>
+							<li><a href="javascript:;"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
+					</ul>
+					<volist name="menu_label" id="label" key="k">
+						<li list-key="{$key}" class="navbar-levelone"<eq name="k" value="1"> current</eq>><a href="javascript:;">{$label}</a></li>
+					</volist>
+				</li>
+			</ul>
+		</nav>
+		<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
+			<ul class="cl">
+				<li>超级管理员</li>
+				<li><a href="{:url('index/renew_auto_increment')}" onclick="msg_alert('{:lang('UPDATE_SUCCESS')}', 'shenhe-tongguo');" class="js-ajax-get">更新表自增</a></li>
+				<li class="dropDown dropDown_hover">
+					<a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+					<ul class="dropDown-menu menu radius box-shadow">
+						<li><a href="javascript:;">个人信息</a></li>
+						<li><a href="#">切换账户</a></li>
+						<li><a href="{:url('Public/logout')}">退出</a></li>
+				</ul>
+			</li>
+				<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
+				<li id="Hui-skin" class="dropDown right dropDown_hover"> <a href="javascript:;" class="dropDown_A" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
+					<ul class="dropDown-menu menu radius box-shadow">
+						<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
+						<li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>
+						<li><a href="javascript:;" data-val="green" title="绿色">绿色</a></li>
+						<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
+						<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
+						<li><a href="javascript:;" data-val="orange" title="橙色">橙色</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</div>
+</header>
+<aside class="Hui-aside">
+	<div class="menu_dropdown bk_2">
+	<volist name="menus" id="menu">
+		<notempty name="menu.son_menu">
+		<dl id="menu-article">
+			<dt><i class="Hui-iconfont Hui-iconfont-{$menu.icon}"></i> {$menu.name}<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<volist name="menu.son_menu" id="vo">
+					<notempty name="vo.son_menu">
+						<li class="second-menu"><a class="second-menu-a" data-href="#" data-title="{$vo.name}" href="javascript:void(0)"><i class="Hui-iconfont Hui-iconfont-sanjiao"></i>{$vo.name}<i class="Hui-iconfont menu_dropdown-arrow"></i></a>
+						<ul class="third-menu">
+						<volist name="vo.son_menu" id="value">
+							<li class="contents-menu" level="3"><a data-href="{:url($value['app'].'/'.$value['controller'].'/'.$value['action'])}" data-title="{$value.name}" href="javascript:void(0)"><i class="Hui-iconfont Hui-iconfont-more"></i>{$value.name}</a></li>
+						</volist>
+						</ul>
+						</li>
+					<else/>
+						<li class="contents-menu" level="2"><a data-href="{:url($vo['app'].'/'.$vo['controller'].'/'.$vo['action'])}" data-title="{$vo.name}" href="javascript:void(0)"><i class="Hui-iconfont Hui-iconfont-sanjiao"></i>{$vo.name}</a></li>
+					</notempty>
+					</volist>
+				</ul>
+			</dd>
+		</dl>
+		</notempty>
+	</volist>
+	</div>
+
+	<div class="menu_dropdown bk_2" style="display:none">
+		<dl id="menu-aaaaa">
+			<dt><i class="Hui-iconfont">&#xe616;</i> 二级导航1<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="article-list.html" data-title="资讯管理" href="javascript:void(0)">三级导航</a></li>
+				</ul>
+			</dd>
+		</dl>
+	</div>
+
+	<div class="menu_dropdown bk_2" style="display:none">
+		<dl id="menu-bbbbb">
+			<dt><i class="Hui-iconfont">&#xe616;</i> 二级导航2<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="article-list.html" data-title="资讯管理" href="javascript:void(0)">三级导航</a></li>
+				</ul>
+			</dd>
+		</dl>
+	</div>
+
+	<div class="menu_dropdown bk_2" style="display:none">
+		<dl id="menu-ccccc">
+			<dt><i class="Hui-iconfont">&#xe616;</i> 二级导航3<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="article-list.html" data-title="资讯管理" href="javascript:void(0)">三级导航</a></li>
+				</ul>
+			</dd>
+		</dl>
+	</div>
+
+</aside>
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+<section class="Hui-article-box">
+	<div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
+		<div class="Hui-tabNav-wp">
+			<ul id="min_title_list" class="acrossTab cl">
+				<li class="active">
+					<span title="我的桌面" data-href="{:url('index/welcome')}">我的桌面</span>
+					<em></em></li>
+		</ul>
+	</div>
+		<div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a></div>
+</div>
+	<div id="iframe_box" class="Hui-article">
+		<div class="show_iframe">
+			<div style="display:none" class="loading"></div>
+			<iframe scrolling="yes" frameborder="0" src="{:url('index/welcome')}"></iframe>
+	</div>
+</div>
+</section>
+
+<div class="contextMenu" id="Huiadminmenu">
+	<ul>
+		<li id="closethis">关闭当前 </li>
+		<li id="closeall">关闭全部 </li>
+</ul>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="__LIB__/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__LIB__/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__STATIC__/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="__STATIC__/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__LIB__/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
+<script type="text/javascript">
+$(function(){
+	menu_effect();
+
+	$("body").Huitab({
+		tabBar:".navbar-wrapper .navbar-levelone",
+		tabCon:".Hui-aside .menu_dropdown",
+		className:"current",
+		index:0,
+	});
+});
+</script>

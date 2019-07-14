@@ -1,0 +1,67 @@
+<div class="cl pd-5 bg-1 bk-gray">
+	<span class="l">
+		<button onclick="datadel_list(this)" class="layui-btn layui-btn-danger"><i class="Hui-iconfont">&#xe6e2;</i> {:lang('DELETE_BY_QUERY')}</button>
+		<button onclick="layer_show('{:lang("ADD_ADMIN_USER")}','add.html','', '410')" class="layui-btn"><i class="Hui-iconfont">&#xe62d;</i>  {:lang('ADD_ADMIN_USER')}</button>
+	</span>
+	<span class="r">{:lang('A_TOTAL_OF')}：<strong>{$count}</strong> {:lang('NUMBER_OF')} </span>
+</div>
+<table class="table table-border table-bordered table-hover table-bg layui-form">
+	<thead>
+		<tr>
+			<th scope="col" colspan="12">{:lang('ADMIN_USER_LIST')}</th>
+		</tr>
+		<tr class="text-c">
+			<th width="40"><input type="checkbox" value="" lay-skin="primary" lay-filter="checkAll"></th>
+			<th width="40">ID</th>
+			<th>{:lang('ADMIN_USER_LOGIN')}</th>
+			<th>{:lang('NICKNAME')}</th>
+			<th class="hide-w4">{:lang('MOBILE')}</th>
+			<th class="hide-w4">{:lang('EMAIL')}</th>
+			<th class="hide-w6">{:lang('ROLE')}</th>
+			<th class="hide-w9">{:lang('JOIN_TIME')}</th>
+			<th class="hide-w9">{:lang('LAST_LOGIN_TIME')}</th>
+			<th class="hide-w9">{:lang('LAST_LOGIN_ADDR')}</th>
+			<th class="hide-w6">{:lang('ENABLED_OR_DISABLED')}</th>
+			<th width="100">{:lang('ACTIONS')}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="list" id="vo">
+			<tr class="text-c">
+				<td><input type="checkbox" lay-skin="primary" <eq name="vo.id" value="1">disabled<else/>value="{$vo.id}"</eq>></td>
+				<td>{$vo.id}</td>
+				<td class="content-nowap">{$vo.user_login|default=get_empty()}</td>
+				<td class="content-nowap">{$vo.user_nickname|default=get_empty()}</td>
+				<td class="hide-w4">{$vo.user_mobile|default=get_empty()}</td>
+				<td class="hide-w4">{$vo.user_email|default=get_empty()}</td>
+				<td class="hide-w6">{$vo.role_name|default=get_empty()}</td>
+				<td class="hide-w9">{$vo.create_time|default=get_empty()}</td>
+				<td class="hide-w9">{$vo.last_login_time|default=get_empty()}</td>
+				<td class="hide-w9">{$vo.last_login_add|default=get_empty()}</td>
+				<td class="td-status hide-w6"><eq name="vo.status" value="1"><span class="layui-badge layui-bg-green">{:lang('IS_ENABLED')}</span><else/><span class="layui-badge">{:lang('IS_DISABLED')}</span></eq></td>
+				<td class="td-manage">
+				<neq name="vo.id" value="1">
+					<eq name="vo.status" value="1">
+						<a href="{:url("User/ban",["id"=>$vo.id])}" class="js-ajax-get" title="{:lang("DISABLED")}"><i class="Hui-iconfont">&#xe631;</i></a>
+					<else/>
+						<a href="{:url("User/cancelBan",["id"=>$vo.id])}" class="js-ajax-get" title="{:lang("ENABLED")}"><i class="Hui-iconfont">&#xe6e1;</i></a>
+					</eq>
+					<a href="javascript:;" onclick="layer_show('{:lang("EDIT")}','{:url("User/edit",["id" => $vo.id])}','', '410')" class="ml-5"  title="{:lang("EDIT")}"><i class="Hui-iconfont">&#xe6df;</i></a>
+					<a href="javascript:;" onclick="layer_show('{:lang("ADMIN_USER_INFO")}','{:url("User/userInfo",["id" => $vo.id])}','', '310')" class="ml-5"  title="{:lang("EDIT")}"><i class="Hui-iconfont">&#xe60d;</i></a>
+					<a href="javascript:;" onclick="datadel_an('{$vo.id}', this)" class="ml-5" title="{:lang("DELETE")}"><i class="Hui-iconfont">&#xe6e2;</i></a>
+				<else/>
+					<a href="javascript:;" class="a-disabled"><i class="Hui-iconfont">&#xe631;</i></a>
+					<a href="javascript:;" class="ml-5 a-disabled"><i class="Hui-iconfont">&#xe6df;</i></a>
+					<a href="javascript:;" class="ml-5 a-disabled"><i class="Hui-iconfont">&#xe60d;</i></a>
+					<a href="javascript:;" class="ml-5 a-disabled"><i class="Hui-iconfont">&#xe6e2;</i></a>
+				</neq>
+				</td>
+			</tr>
+		</volist>
+	</tbody>
+</table>
+<div class="pagination_box">
+	<div class="pagination_desc">{:lang('TOTAL_OF')} {$desc.current_page}/{$desc.last_page} {:lang('PAGE_OF')} {$desc.total} {:lang('NUMBER_OF_ROWS')}</div>
+	{$page}
+	<div style="clear: both;"></div>
+</div>

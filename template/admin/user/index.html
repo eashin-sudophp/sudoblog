@@ -1,0 +1,17 @@
+<script type="text/javascript" src="__LIB__/My97DatePicker/4.8/WdatePicker.js"></script>
+</head>
+<body>
+<include file="public/breadcrumb">
+<div class="text-c mt-20">
+	<form class="select-form">
+		{:lang('DATES_RANGE')}：
+		<input type="text" onfocus="selecttime(1)" class="layui-input line-block Wdate" name="start" value="{$get.start|default=''}" autocomplete="off">
+		-
+		<input type="text" onfocus="selecttime(2)" class="layui-input line-block Wdate" name="end" value="{$get.end|default=''}" autocomplete="off">
+		<input type="text" class="layui-input line-block width-180" placeholder="{:lang('INPUT_MANAGER_NAME')}" name="username" value="{$get.username|default=''}" autocomplete="off">
+		<button type="submit" class="layui-btn select-form-submit"><i class="Hui-iconfont">&#xe665;</i> {:lang('SELECT_USER')}</button>
+	</form>
+</div>
+<div class="page-container pad-updown-zero ">
+	<include file="user/paging">
+</div>

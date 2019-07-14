@@ -1,0 +1,42 @@
+</head>
+<body>
+<include file="public/breadcrumb">
+<article class="page-container">
+	<form action="{:url('Article/configPost')}" method="post" class="form form-horizontal js-ajax-form layui-form">
+		<volist name="config" id="vo">
+			<div class="row cl">
+				<label class="form-label my-label col-xs-4 col-sm-2">{:lang($vo['key'])}</label>
+				<switch name="vo.type">
+					<case value="0"></case>
+					<case value="1"></case>
+					<case value="2">
+						<div class="formControls col-xs-8 col-sm-6 skin-minimal">
+							<input type="checkbox" name="{$vo.key}" value="1" lay-skin="switch" <eq name="vo.value" value="1">checked</eq> lay-text="ON|OFF">
+						</div>
+					</case>
+					<case value="3">
+						<div class="formControls col-xs-8 col-sm-2">
+							<input type="number" class="layui-input js-number" value="{$vo.value|default=''}" placeholder="{$vo.key}" name="{$vo.key}" max="{$vo.param|json_decode|max}" min="{$vo.param|json_decode|min}" autocomplete="off">
+						</div>
+					</case>
+					<case value="4">
+						<div class="formControls col-xs-8 col-sm-3">
+							<select name="{$vo.key}" class="select">
+								<option value="">{:lang('SELECT_PLEASE')}{:lang($vo['key'])}</option>
+								<foreach name="vo.param|json_decode" item="v">
+									<option value="{$v}" <eq name="vo.value" value="$v">selected</eq>>{$v}</option>
+								</foreach>
+							</select>
+						</div>
+					</case>
+				</switch>
+			</div>
+		</volist>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-7 col-xs-offset-4 col-sm-offset-2">
+				<button class="layui-btn normal js-ajax-submit" type="submit">{:lang('SAVE')}</button>
+				<button class="layui-btn layui-btn-primary" type="reset">{:lang('RESET')}</button>
+			</div>
+		</div>
+	</form>
+</article>

@@ -1,0 +1,38 @@
+<div class="cl pd-5 bg-1 bk-gray">
+	<span class="l">
+		<button onclick="datadel_list(this)" class="layui-btn layui-btn-danger"><i class="Hui-iconfont">&#xe6e2;</i> {:lang('DELETE_BY_QUERY')}</button>
+		<button onclick="layer_show('{:lang(\'ADD_CATE\')}','add.html','','570')" class="layui-btn"><i class="Hui-iconfont">&#xe600;</i> {:lang('ADD_CATE')}</button>
+	</span>
+	<span class="r">{:lang('A_TOTAL_OF')}：<strong>{$cate|count}</strong> {:lang('NUMBER_OF')}</span>
+</div>
+<table class="table table-border table-bordered table-hover table-bg layui-form">
+	<thead>
+		<tr>
+			<th scope="col" colspan="8">{:lang('ARTICLE_CATE')}</th>
+		</tr>
+		<tr class="text-c">
+			<th width="40"><input type="checkbox" value="" lay-skin="primary" lay-filter="checkAll"></th>
+			<th width="50">ID</th>
+			<th class="content-nowap">{:lang('CATE_NAME')}</th>
+			<th class="content-nowap">{:lang('CATE_ALIAS')}</th>
+			<th class="hide-w6">{:lang('STATUS')}</th>
+			<th width="50">{:lang('ACTIONS')}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="cate" id="vo">
+		<tr class="text-c">
+			<td><input type="checkbox" value="{$vo.id}" lay-skin="primary"></td>
+			<td>{$vo.id}</td>
+			<td class="text-l pl-20 content-nowap max-w-150"><neq name="vo.level" value="0">|</neq>{$vo['level']|str_repeat='—', ###}{$vo.cate_name}</td>
+			<td class="hide-w9">{$vo.cate_alias}</td>
+			<td><eq name="vo.status" value="1"><span class="layui-badge layui-bg-green">{:lang('IS_ENABLED')}</span><else/><span class="layui-badge">{:lang('IS_DISABLED')}</span></eq></td>
+			<!-- <td class="td-status hide-w6"><eq name="vo.status" value="1"><span class="layui-badge layui-bg-green">{:lang('IS_ENABLED')}</span><else/><span class="layui-badge">{:lang('IS_DISABLED')}</span></eq></td> -->
+			<td>
+				<a title="{:lang('EDIT')}" href="javascript:;" onclick="layer_show('{:lang("CATE_EDIT")}','{:url("category/edit",["id"=>$vo["id"]])}','','570')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+				<a title="{:lang('DELETE')}" href="javascript:;" onclick="datadel_an('{$vo.id}', this)" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>

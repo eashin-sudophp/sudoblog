@@ -1,0 +1,24 @@
+<script type="text/javascript" src="__LIB__/My97DatePicker/4.8/WdatePicker.js"></script>
+</head>
+<body>
+<include file="public/breadcrumb">
+<form class="form form-horizontal layui-form text-c mt-20 select-form">
+	<div onclick="close_tab(this, '{:lang('TOP_RIGHT_BUTTON_REFRESH')}', 'dingyue');" class="layui-btn layui-btn-normal">{:lang('CLOSE_TAB')}</div>
+ 	<div class="select-box- text-l line-block">
+		<select name="cate_id" class="select">
+			<option value="">{:lang('ALL_CATEGORY')}</option>
+			<foreach name="cate" item="vo">
+				<option value="{$vo.id}">{$vo.cate_name}</option>
+			</foreach>
+		</select>
+	</div>
+	{:lang('PUSH_TIME')}：
+	<input type="text" onfocus="selecttime(1)" name="start" class="layui-input Wdate line-block">
+	-
+	<input type="text" onfocus="selecttime(2)" name="end" class="layui-input Wdate line-block">
+	<input type="text" placeholder=" {:lang('ARTICLE_NAME')}" name="title" class="layui-input line-block w-25">
+	<button class="layui-btn select-form-submit" type="submit"><i class="Hui-iconfont">&#xe665;</i> {:lang('SELECT_ARTICLE')}</button>
+</form>
+<div class="page-container">
+	<include file="article/paging">
+</div>

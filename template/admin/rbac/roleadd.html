@@ -1,0 +1,29 @@
+</head>
+<body>
+<nav class="breadcrumb">
+	<i class="Hui-iconfont Hui-iconfont-user-group"></i> <a href="javascript:parent.layer.closeAll()"> <empty name='row'>{:lang('ROLE_ADD')}<else/>{:lang('ROLE_DETAIL')}</empty></a>
+</nav>
+<article class="page-container">
+	<form action="<empty name='row'>{:url('Rbac/roleAddPost')}<else/>{:url('Rbac/roleEditPost')}</empty>" method="post" class="form form-horizontal js-ajax-form">
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2"><span class="c-red">*</span>{:lang("ROLE_NAME")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<input type="text" class="layui-input js-require" value="{$row.name|default=''}" placeholder="name" name="name" maxlength="30" autocomplete="off">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang('REMARK')}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<textarea name="remark" class="layui-textarea" maxlength="200" placeholder="remark" onKeyUp="$(this).next().find('em').html(this.value.length)">{$row.remark|default=''}</textarea>
+				<p class="textarea-numberbar"><em class="textarea-length"><notempty name='row.remark'>{$row.remark|mb_strlen}<else/>0</notempty></em>/200</p>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-6 col-xs-offset-4 col-sm-offset-2">
+				<notempty name='row'><input type="hidden" name="id" value="{$row.id}"/></notempty>
+				<button class="layui-btn js-ajax-submit <empty name='row'>js-add</empty>" lay-submit lay-filter="formDemo">{:lang('ONSUBMIT')}</button>
+      			<button type="reset" class="layui-btn layui-btn-primary">{:lang('RESET')}</button>
+			</div>
+		</div>
+	</form>
+</article>

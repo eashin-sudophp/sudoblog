@@ -1,0 +1,74 @@
+</head>
+<body>
+<nav class="breadcrumb">
+	<i class="Hui-iconfont Hui-iconfont-fenlei"></i> <a href="javascript:parent.layer.closeAll()"> <empty name='row'>{:lang('MENU_ADD')}<else/>{:lang('MENU_DETAIL')}</empty></a>
+</nav>
+<article class="page-container">
+	<form action="<empty name='row'>{:url('Menu/addPost')}<else/>{:url('Menu/editPost')}</empty>" method="post" class="form form-horizontal js-ajax-form layui-form">
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("PARENT_MENU")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<span class="select-box-">
+					<select name="parent_id" class="select" <notempty name="row">disabled="disabled"</notempty>>
+						<option value="" >{:lang('TOP_LEVEL_MENU')}</option>
+						<volist name="menus" id="menu">
+							<option value="{$menu.id}" <if condition="!empty($row['parent_id']) AND $row['parent_id'] eq $menu['id']">selected</if>><gt name="menu.level" value="0">|{$menu.level|str_repeat='—',###}</gt>{$menu.name}</option>
+						</volist>
+					</select>
+				</span>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2"><span class="c-red">*</span>{:lang("MENU_NAME")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<input type="text" class="layui-input js-require" value="{$row.name|default=''}" placeholder="name" name="name" maxlength="30" autocomplete="off">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2"><span class="c-red">*</span>{:lang("MODULE_NAME")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<input type="text" class="layui-input js-require js-alphadash" value="{$row.app|default=''}" placeholder="app" name="app" maxlength="30" autocomplete="off">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2"><span class="c-red">*</span>{:lang("CONTROLLER_NAME")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<input type="text" class="layui-input js-require js-alphadash" value="{$row.controller|default=''}" placeholder="controller" name="controller" maxlength="30" autocomplete="off">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2"><span class="c-red">*</span>{:lang("ACTION_NAME")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<input type="text" class="layui-input js-require js-alphadash" value="{$row.action|default=''}" placeholder="action" name="action" maxlength="30" autocomplete="off">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("MENU_TYPE")}</label>
+			<div class="formControls col-xs-8 col-sm-10">
+				<input name="type" type="radio" value="1" title="{:lang('MENU_WITH_VIEW')}" <if condition="!isset($row['type']) OR $row['type'] eq 1">checked</if>>
+				<input name="type" type="radio" value="2" title="{:lang('MENU_WITHOUT_VIEW')}" <if condition="isset($row['type']) AND $row['type'] eq 2">checked</if>>
+				<input name="type" type="radio" value="0" title="{:lang('ONLY_MENU')}" <if condition="isset($row['type']) AND $row['type'] eq 0">checked</if>>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("DISPLAY_STATUS")}</label>
+			<div class="formControls col-xs-8 col-sm-7 skin-minimal-">
+				<input type="checkbox" name="status" lay-skin="switch" lay-text="ON|OFF" value="1" <if condition="!isset($row['status']) OR $row['status'] neq 0">checked</if> />
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("SORT")}</label>
+			<div class="formControls col-xs-8 col-sm-2">
+				<input type="number" class="layui-input js-number" value="{$row.list_order|default=''}" placeholder="list_order" name="list_order" max="10000" min="0" autocomplete="off">
+			</div>
+		</div>
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-7 col-xs-offset-4 col-sm-offset-2">
+				<notempty name='row'><input type="hidden" name="id" value="{$row.id}"/></notempty>
+				<button class="layui-btn js-ajax-submit <empty name='row'>js-add</empty>">{:lang('ONSUBMIT')}</button>
+      			<button type="reset" class="layui-btn layui-btn-primary">{:lang('RESET')}</button>
+			</div>
+		</div>
+	</form>
+</article>

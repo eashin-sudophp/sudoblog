@@ -1,38 +1,123 @@
+eashin的个人博客，持续完善丰富博客各项功能。
+
 # sudoblog
 
-#### 介绍
-基于thinkphp5开发的的博客，风格简约便于二次开发扩展，功能持续完善中。。。
-项目案例：blog.sudophp.com
+#### 相关链接
+博客： https://blog.sudophp.com/
+介绍： [开源博客项目基于thinkphp5](http://blog.sudophp.com/sudoblog)
 
-#### 软件架构
-软件架构说明
+#### 介绍
+急于整出[博客](https://blog.sudophp.com/)并上线，所以将以前基于thinkphp开发的简易项目搬过来，进行前后端的初步优化。
+当前博客暂时以文章模块为主，不过易于二次开发扩展；设置了路由简化前台文章和列表的访问链接，实现seo友好的链接结构；后台模板是hui和layui（未实现手机端自适应），前端是买的一个模板套上去。更多功能持续完善中
+下一步实现免登陆评论和评论管理，pv/uv和文章浏览数，单页模板管理等（ps：其他如微信扫码登陆，公众号验证码，邮箱功能等）
+
+![sudoblog前台](http://blog.sudophp.com/static/images/screenshot/breath_index.png)  
+![sudoblog后台登陆](http://blog.sudophp.com/static/images/screenshot/breath_login.png)  
+![sudoblog后台文章](http://blog.sudophp.com/static/images/screenshot/breath_article.png)  
+![sudoblog后台文章分类](http://blog.sudophp.com/static/images/screenshot/breath_category.png)  
+
+
+#### 第一版的目录结构
+~~~
+www  WEB部署目录（或者子目录）
+├─application           应用目录
+│  ├─admin              管理后台模块目录
+│  │  ├─controller      控制器目录
+│  │  ├─lib             逻辑控制器目录
+│  │  ├─model           模型目录
+│  │  ├─volidate        验证器目录
+│  │  ├─common.php      模块函数文件
+│  │  └─config.php      模块配置文件
+│  ├─api                接口模块目录
+│  │  └─controller      控制器目录
+│  ├─common             公共模块目录
+│  │  └─lib             公共类库目录
+│  ├─extra              其他配置目录
+│  ├─index              前台模块目录
+│  │  ├─controller      控制器目录
+│  │  ├─common.php      模块函数文件
+│  │  └─config.php      模块配置文件
+│  ├─lang               语言包目录
+│  ├─command.php        命令行工具配置文件
+│  ├─common.php         公共函数文件
+│  ├─config.php         公共配置文件
+│  ├─route.php          路由配置文件
+│  ├─tags.php           应用行为扩展定义文件
+│  └─database.php       数据库配置文件
+│
+├─extend                扩展类库目录
+│  ├─common             公共模块目录
+│  │  ├─Cache.php       缓存实现文件
+│  │  ├─Errcode.php     接口错误码文件
+│  │  ├─Format.php      统一格式验证器
+│  │  └─Redis.php       reids实现文件
+│  └─Qiniu              七牛实现目录
+│
+├─public                WEB目录（对外访问目录）
+│  ├─_mystorage         自定义的临时缓存目录
+│  ├─lib                前端扩展存放目录
+│  ├─template           前台模板备份目录
+│  ├─upload             上传目录
+│  ├─index.php          入口文件
+│  └─.htaccess          用于apache的重写
+│
+├─thinkphp              框架系统目录
+├─runtime               应用的运行时目录（可写，可定制）
+├─vendor                第三方类库目录（Composer依赖库）
+├─build.php             自动生成定义文件（参考）
+├─composer.json         composer 定义文件
+├─LICENSE.txt           授权说明文件
+├─README.md             README 文件
+├─think                 命令行入口文件
+~~~
 
 
 #### 安装教程
 
-1. xxxx
-2. xxxx
-3. xxxx
+1. git clone https://gitee.com/ashin1206293024_admin/sudoblog.git 把项目拉下来；
+2. 后台登录默认为admin 123456；
+3. 需要开启mod_rewrite；
+4. 添加后台模板到/template/web/xxx/,静态资源放到/public/static/web/xxx/下（xxx为前端模板的名称，模板文件命名参考上述目录结构）
 
-#### 使用说明
+#### 链接结构说明
 
-1. xxxx
-2. xxxx
-3. xxxx
+1.后台
+隐藏路由文件，默认/admin即可完成访问，链接规则：http://blog.sudophp/admin/index/welcome.html
+为tp5的默认url规则，[学习-tp5的url访问](https://www.kancloud.cn/manual/thinkphp5/118012)
+2.前台
+首页: http://blog.sudophp.com  （第二页 http://blog.sudophp.com/2 ...）
+文章分类列表: http://blog.sudophp.com/php （第二页 http://blog.sudophp.com/php/2 ...）
+文章详情页 http://blog.sudophp.com/php/what-is-php.html
+...以上路由规则见：application/route.php...
 
-#### 参与贡献
+#### 项目介绍
 
-1. Fork 本仓库
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
+已完成部分：
+- [x] 前台模板基于boostrap的响应式页面布局适配手机和平板
+- [x] 容易添加和切换前台模板
+- [x] seo友好的链接结构
+- [x] ueditor 百度富文本编辑器
+
+下一步待实现：
+- [ ] 评论功能-免登陆评论和后台的评论管理，一键设置评论免审核等
+- [ ] 文章浏览数，pv/uv的统计
+- [ ] 友情链接及管理功能
+- [ ] markdown文本编辑器
+- [ ] 博客单页，暂定留言页、文章标签页、友链页、分类（无限极分类）页、时光轴倒叙的文章列表页、网站地图页等
+
+可能实现：
+- [ ] 微信登陆
+- [ ] 公众号验证码
+- [ ] 邮箱功能
+
+#### 致谢
+
+[thinkphp5](http://www.thinkphp.cn/) http://www.thinkphp.cn/
+[jquery](https://jquery.com/) https://jquery.com/
+[layui](https://www.layui.com/) https://www.layui.com/
+[h-ui](http://www.h-ui.net/) http://www.h-ui.net/
+
+小的会抱紧各位大佬的大腿，不足之处敬请指正，不断去完善改进sudoblog。(by Eashin)
+偶会一直成长滴。(by Sudoblog)
 
 
-#### 码云特技
-
-1. 使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2. 码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3. 你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4. [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5. 码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6. 码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)

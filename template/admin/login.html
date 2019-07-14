@@ -1,0 +1,46 @@
+{__NOLAYOUT__}
+<!DOCTYPE html>
+<html>
+<head>
+<title>{:lang('ADMIN_CENTER')}</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link type="text/css" rel="stylesheet" href="__ADMIN__/css/admin.css"></link>
+<script type="text/javascript" src="__LIB__/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__LIB__/layer/3.1.1/layer.js"></script>
+<script type="text/javascript" src="__ADMIN__/js/admin.js"></script>
+<!-- <script type="text/javascript" src="__STATIC__/h-ui/js/H-ui.min.js"></script> -->
+<script type="text/javascript" src="__LIB__/layui/2.2.5/layui.js"></script>
+</head>
+<body>
+<div id="login-body">
+	<div class="login-form">
+		<h1>{$web_title} {:lang('ADMIN_CENTER')}</h1>
+		<div class="topbar">
+			<div class="close" onclick="close_form()"> </div>
+		</div>
+		<div class="avtar">
+			<img src="__ADMIN__/images/avtar.png" />
+		</div>
+		<form class="js-ajax-form" action="{:url('public/dologin')}">
+			<div class="usr">
+				<input type="text" name="username" value="" class="input-text js-require user" placeholder="Username" bakholder="Username" maxlength="30" autocomplete="off">
+			</div>
+			<div class="key">
+				<input type="password" name="password" value="" class="input-password js-require" placeholder="Password" bakholder="Password" maxlength="30">
+			</div>
+			<div class="yzm">
+				<input type="text" class="input-text js-require js-number code" name="captcha" value="" bakholder="Code" placeholder="Code"  onfocus="$('.captcha').fadeIn('fast');" maxlength="4" autocomplete="off">
+				<captcha height="50" width="160" font-size="18" bg="240,240,240" />
+			</div>
+			<div class="signin">
+				<input type="submit" value="Login" class="form-submit js-ajax-submit">
+			</div>
+		</form>
+	</div>
+	<div class="copy-rights">
+			Copyright &copy; 2018-2028. All rights reserved. written by Eashin 12/31/2017
+	</div>
+</div>
+</body>
+<script type="text/javascript"> login_effect();</script>
+</html>

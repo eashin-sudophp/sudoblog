@@ -1,0 +1,106 @@
+<div id="main" class="content">
+    <div class="container">
+        <article itemscope="itemscope">
+            <div class="posts-list js-posts">
+                <foreach $articles as $item>
+                    <if condition="substr_count($item['content'], '<img') egt 5">
+                        <!--图文博客-->
+                        <div class="post post-layout-list js-gallery" data-aos="fade-up">
+                            <div class="post-album">
+                                <div class="row content">
+                                    <div class="bg" style="background-image: url({$item.thumbnail ?: ($domain . '/static/images/thumb/'.$item.update_time%9 . '.jpg')});"></div>
+                                    <div class="contentext flex-xs-middle">
+                                        <div class="album-title">
+                                            <a href="{$domain}/{$item.cate_alias}/{$item.brief_title}.html">{$item.title}</a>
+                                        </div>
+                                        <h5 class="review-item-creator"><b>发布日期：</b>{$item.create_time|date="Y-m-d", ###}</h5>
+                                        <div class="album-content">{$item.summary?:mysubstr($item.content_basic,220)}</div>
+                                    </div>
+                                    <div class="album-thumb-width flex-xs-middle">
+                                        <div class="row album-thumb no-gutter">
+                                            <php>$tmp_img = preg_match_img($item['content'], 5);</php>
+                                            <foreach $tmp_img as $v>
+                                                <div class="col-xs-4"><img class="thumb" src="{$v|image_thumbnail='200x200'}" /></div>
+                                            </foreach>
+                                            <div class="col-xs-4">
+                                                <a href="{$domain}/{$item.cate_alias}/{$item.brief_title}.html">5 pics</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <elseif condition="$item['update_time']%2 != 0"/>
+                        <!--更新日期是奇数-->
+                        <div class="post post-layout-list" data-aos="fade-up">
+                            <div class="status_list_item icon_kyubo">
+                                <div class="status_user" style="background-image:  url({$item.thumbnail ?: ($domain . '/static/images/thumb/'.$item.update_time%9 . '.jpg')});">
+                                    <div class="status_section">
+                                        <a href="{$domain}/{$item.cate_alias}/{$item.brief_title}.html" class="status_btn">{$item.title}</a>
+                                        <p class="section_p"> {$item.summary?:mysubstr($item.content_basic,220)} </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <else/>
+                        <!--更新日期是偶数-->
+                        <div class="post post-layout-list" data-aos="fade-up">
+                            <div class="postnormal review ">
+                                <div class="post-container review-item">
+                                    <div class="row review-item-wrapper">
+                                        <div class="col-sm-3">
+                                            <a rel="nofollow" href="{$domain}/{$item.cate_alias}/{$item.brief_title}.html">
+                                                <div class="review-item-img" style="background-image: url({$item.thumbnail ?: ($domain . '/static/images/thumb/'.$item.update_time%9 . '.jpg')});"></div>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-9 flex-xs-middle">
+                                            <div class="review-item-title">
+                                                <a href="{$domain}/{$item.cate_alias}/{$item.brief_title}.html" rel="bookmark">{$item.title}</a>
+                                            </div>
+                                            <div class="review-item-creator"><b>发布日期：</b>{$item.create_time|date="Y-m-d", ###}</div>
+                                            <span class="review-item-info"><b>总浏览量：</b>{$item.view_times} reads</span>
+                                        </div>
+                                    </div>
+                                    <div class="review-bg-wrapper">
+                                        <div class="bg-blur" style="background-image: url({$item.thumbnail ?: ($domain . '/static/images/thumb/'.$item.update_time%9 . '.jpg')});"></div>
+                                    </div>
+                                </div>
+                                <div class="post-container">
+                                    <div class="entry-content">{$item.summary?:mysubstr($item.content_basic,220)}</div>
+                                    <div class="post-footer">
+                                        <a class="gaz-btn primary" href="{$domain}/{$item.cate_alias}/{$item.brief_title}.html">READ MORE</a>
+                                        <span class="total-comments-on-post pull-right"><a href="{$domain}/{$item.cate_alias}/{$item.brief_title}.html#评论~~~~~">{$item.view_times} Comments</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-------- end ----------->
+                    </if>
+                </foreach>
+            </div>
+            <!-- post-formats end Infinite Scroll star -->
+            <!-- post-formats -->
+            <div class="pagination js-pagination">
+                <div class="js-next pagination__load">
+                    {$pagination}
+                    <a href="#"><i class="iconfont">&#xe605;</i></a>
+                </div>
+            </div>
+            <!-- -pagination  -->
+    </div>
+</div>
+<style>
+    .pager {
+        width: 100%;
+        font-size: 30px;
+    }
+    .pager li:first-child {
+        float: left;
+    }
+    .pager li:nth-child(2) {
+        float: right;
+    }
+    .layui-btn-disabled {
+        color: #880000;
+    }
+</style>

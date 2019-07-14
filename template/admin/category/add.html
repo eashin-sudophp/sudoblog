@@ -1,0 +1,135 @@
+<style>
+			b {
+				font-weight: normal;
+			}
+			.transform-icon {
+				transform: rotate(90deg);
+				position: absolute;
+				transition-duration: 0.3s;
+				transition-property: all;
+				line-height: 38px;
+				margin-left: -8px;
+			}
+			.item-hide {
+				display: none;
+			}
+			.fixed-top {
+				position: fixed;
+				top: 0px;
+				width: 100%;
+				box-shadow: 0px 2px 5px #e5e5e5;
+			}
+			.fixed-top+article {
+				padding-top: 60px;
+			}
+		</style>
+</head>
+<body>
+<nav class="breadcrumb fixed-top">
+	<i class="Hui-iconfont Hui-iconfont-fenlei"></i> <a href="javascript:parent.layer.closeAll()"> <empty name='row'>{:lang('ADD_CATE')}<else/>{:lang('CATE_DETAIL')}</empty></a>
+</nav>
+<article class="page-container">
+	<form action="<empty name='row'>{:url('Category/addPost')}<else/>{:url('Category/editPost')}</empty>" method="post" class="form form-horizontal js-ajax-form layui-form">
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("PARENT_CATE")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<span class="select-box-">
+					<select name="parent_id" class="select" <notempty name="row">disabled1="disabled"</notempty>>
+						<option value="" >{:lang('TOP_LEVEL_CATE')}</option>
+						<volist name="cate" id="vo">
+							<lt name="vo.level" value="2"><option value="{$vo.id}" <if condition="!empty($row['parent_id']) AND $row['parent_id'] eq $row['id']">selected</if>><gt name="vo.level" value="0">|{$vo.level|str_repeat='—',###}</gt>{$vo.cate_name}</option></lt>
+						</volist>
+					</select>
+				</span>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2"><span class="c-red">*</span>{:lang("CATE_NAME")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<input type="text" class="layui-input js-require js-chs" value="{$row.cate_name|default=''}" placeholder="cate_name" name="cate_name" maxlength="30" autocomplete="off">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2"><span class="c-red">*</span>{:lang("CATE_ALIAS")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<input type="text" class="layui-input js-require js-alphadash" value="{$row.cate_alias|default=''}" placeholder="cate_alias" name="cate_alias" maxlength="30" autocomplete="off">
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="formControls col-xs-12 col-sm-10" style="text-align: center; ">
+				<span class="layui-btn layui-btn-primary expend-btn" next-hide="1"><i class="layui-icon transform-icon">&#xe65b;</i> &nbsp;&nbsp;&nbsp;&nbsp;<b>{:lang('CLICK_AND_EXPEND_SHRINK', ['expend' => lang('EXPEND')])}</b></span>
+			</div>
+		</div>
+
+
+
+	<div style="display:none;">
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("CATE_SEO_TITLE")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<input type="text" class="layui-input js-chs" value="{$row.seo_title|default=''}" placeholder="seo_title" name="seo_title" maxlength="100" autocomplete="off">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("CATE_SEO_KEYWORDS")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<textarea name="seo_keyword" class="layui-textarea" maxlength="200" placeholder="seo_keyword" onKeyUp="$(this).next().find('em').html(this.value.length)">{$row.seo_keyword|default=''}</textarea>
+				<p class="textarea-numberbar"><em class="textarea-length"><notempty name='row.seo_keyword'>{$row.seo_keyword|mb_strlen}<else/>0</notempty></em>/200</p>
+			</div>
+			<span class="layui-word-aux col-sm-3">{:lang('SEO_KEYWORDS_TIPS')}</span>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("CATE_SEO_DESCRIPTION")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<textarea name="seo_description" class="layui-textarea" maxlength="200" placeholder="seo_description" onKeyUp="$(this).next().find('em').html(this.value.length)">{$row.seo_description|default=''}</textarea>
+				<p class="textarea-numberbar"><em class="textarea-length"><notempty name='row.seo_description'>{$row.seo_description|mb_strlen}<else/>0</notempty></em>/200</p>
+			</div>
+		</div>
+	</div>
+
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("STATUS")}</label>
+			<div class="formControls col-xs-8 col-sm-7 skin-minimal-">
+				<input type="checkbox" name="status" lay-skin="switch" lay-text="ON|OFF" value="1" <if condition="!isset($row['status']) OR $row['status'] neq 0">checked</if> />
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("SORT")}</label>
+			<div class="formControls col-xs-8 col-sm-2">
+				<input type="number" class="layui-input js-number" value="{$row.list_order|default=''}" placeholder="list_order" name="list_order" max="10000" min="0" autocomplete="off">
+			</div>
+		</div>
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-7 col-xs-offset-4 col-sm-offset-2">
+				<notempty name='row'><input type="hidden" name="id" value="{$row.id}"/></notempty>
+				<button class="layui-btn js-ajax-submit js-test <empty name='row'>js-add</empty>">{:lang('ONSUBMIT')}</button>
+      			<button type="reset" class="layui-btn layui-btn-primary">{:lang('RESET')}</button>
+			</div>
+		</div>
+	</form>
+</article>
+<script>
+    var click_auth = 1;
+	$(".expend-btn").click(function(){
+		if (click_auth != 1) {
+			return false;
+		}
+		click_auth = 0;
+		var num = $(this).attr('next-hide-num');
+		if ($(this).attr('next-hide') == 1) {
+			$(this).attr('next-hide', 0).find('i').css('transform', 'rotate(270deg)');
+			$(this).find('b').html('{:lang("CLICK_AND_EXPEND_SHRINK", ["expend" => lang("SHRINK")])}');
+			$(this).parents('.row').next().slideDown(700, function () {
+				click_auth = 1;
+			});
+		} else {
+			$(this).attr('next-hide', 1).find('i').css('transform', 'rotate(90deg)');
+			$(this).find('b').html('{:lang("CLICK_AND_EXPEND_SHRINK", ["expend" => lang("EXPEND")])}');
+			$(this).parents('.row').next().slideUp(700, function () {
+				click_auth = 1;
+			});
+		}
+	});
+
+</script>

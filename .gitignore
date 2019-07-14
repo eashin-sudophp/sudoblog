@@ -1,0 +1,9 @@
+/application/database.php
+/public/_mystorage
+/public/upload
+/runtime
+/vendor
+.idea
+composer.lock
+*.log
+database.php

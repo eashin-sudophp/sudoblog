@@ -1,0 +1,55 @@
+</head>
+<body>
+<nav class="breadcrumb">
+	<i class="Hui-iconfont Hui-iconfont-root"></i> <a href="javascript:parent.layer.closeAll()"> <empty name='row'>{:lang('ADD_ADMIN_USER')}<else/>{:lang('ADMIN_USER_DETAIL')}</empty></a>
+</nav>
+<article class="page-container">
+	<form action="<empty name='row'>{:url('User/addPost')}<else/>{:url('User/editPost')}</empty>" method="post" class="form form-horizontal js-ajax-form layui-form">
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2"><empty name='row'><span class="c-red">*</span></empty>{:lang("ADMIN_USER_LOGIN")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<input type="text" class="layui-input js-alphadash <empty name='row'>js-require<else/>input-disabled</empty>" <notempty name='row'>disabled="disabled"</notempty> value="{$row.user_login|default=''}" placeholder="username" name="username" maxlength="30" autocomplete="off">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2"><empty name='row'><span class="c-red">*</span></empty>{:lang("PASSWORD")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<input type="password" class="layui-input js-alphadash <empty name='row'>js-require</empty>" placeholder="password" name="password" maxlength="30" autocomplete="new-password">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2"><empty name='row'><span class="c-red">*</span></empty>{:lang("CONFIRM_PASSWORD")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<input type="password" class="layui-input js-confirm <empty name='row'>js-require</empty>" placeholder="repassword" name="repassword" maxlength="30" autocomplete="new-password" confirm="password">
+			</div>
+		</div>
+		<div class="row cl layui-form-item">
+			<label class="form-label my-label col-xs-4 col-sm-2"><span class="c-red">*</span>{:lang("ROLE")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<span class="select-box-">
+					<select name="role_id" class=" js-require">
+						<option value="">{:lang('SELECT_ROLES')}</option>
+						<volist name="roles" id="vo">
+							<option value="{$vo.id}" <if condition="isset($row['role_id']) AND $row['role_id'] eq $vo['id']">selected</if>>{$vo.name}</option>
+						</volist>
+					</select>
+				</span>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("ENABLED_OR_DISABLED")}</label>
+			<div class="formControls col-xs-8 col-sm-7 skin-minimal-">
+				<input name="status" type="radio" value="1" title="{:lang('ENABLED')}" <if condition="!isset($row['status']) OR $row['status'] neq 0">checked</if>>
+				<input name="status" type="radio" value="0" title="{:lang('DISABLED')}" <if condition="isset($row['status']) AND $row['status'] eq 0">checked</if>>
+			</div>
+		</div>
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-6 col-xs-offset-4 col-sm-offset-2">
+				<notempty name='row'><input type="hidden" name="id" value="{$row.id}"/></notempty>
+				<button class="layui-btn js-ajax-submit <empty name='row'>js-add</empty>">{:lang('ONSUBMIT')}</button>
+      			<button type="reset" class="layui-btn layui-btn-primary">{:lang('RESET')}</button>
+			</div>
+		</div>
+	</form>
+</article>

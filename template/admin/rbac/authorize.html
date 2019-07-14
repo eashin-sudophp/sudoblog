@@ -1,0 +1,88 @@
+</head>
+<body>
+<nav class="breadcrumb">
+  <i class="Hui-iconfont Hui-iconfont-user-group"></i> <a href="javascript:parent.layer.closeAll()"> {:lang('ROLE_SETTING')}</a>
+</nav>
+<article class="page-container">
+	<form action="{:url('Rbac/authorizePost')}" method="post" class="form form-horizontal js-ajax-form layui-form">
+		<ul id="Huifold1" class="Huifold">
+			<volist name="menus" id="menu" key="k">
+				<empty name="menu.son_menu"><php>continue;</php></empty>
+				<li class="item" >
+					<span class="title-label">
+						<input type="checkbox" value="{$menu.rule}" name="rules[]" id="user-Character-0" title="{$menu.name}" lay-skin="primary" lay-filter="check-auth" level="{$menu.level_path}-{$menu.id}" <if condition="in_array($menu['rule'], $rules)">checked</if>>
+					</span>
+					<h4 style=""><b>+</b></h4>
+					<div class="menu-content info">
+					<volist name="menu.son_menu" id="vo">
+						<input type="checkbox" class="parent-{$vo.level_path}" name="rules[]" value="{$vo.rule}" title="{$vo.name}" lay-skin="primary" lay-filter="check-auth" level="{$vo.level_path}-{$vo.id}" <if condition="in_array($vo['rule'], $rules)">checked</if> />
+					</volist>
+					</div>
+				</li>
+			</volist>
+		</ul>
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+				<input type="hidden" name="id" value="{$id}" />
+				<button class="layui-btn js-ajax-submit" lay-submit lay-filter="formDemo">{:lang('ONSUBMIT')}</button>
+        		<button type="reset" class="layui-btn layui-btn-primary">{:lang('RESET')}</button>
+			</div>
+		</div>
+	</form>
+</article>
+<script>
+	jQuery.Huifold = function(obj,obj_c,speed,obj_type,Event){
+		if(obj_type == 2){
+			$(obj+":first").find("b").html("-");
+			$(obj_c+":first").show()}
+		$(obj).bind(Event,function(){
+			if($(this).next().is(":visible")){
+				if(obj_type == 2){
+					return false}
+				else{
+					$(this).next().slideUp(speed).end().removeClass("selected");
+					$(this).find("b").html("+")}
+			}
+			else{
+				if(obj_type == 3){
+					$(this).next().slideDown(speed).end().addClass("selected");
+					$(this).find("b").html("-")}else{
+					$(obj_c).slideUp(speed);
+					$(obj).removeClass("selected");
+					$(obj).find("b").html("+");
+					$(this).next().slideDown(speed).end().addClass("selected");
+					$(this).find("b").html("-")}
+			}
+		})
+	}
+
+
+	$(function(){
+		$.Huifold("#Huifold1 .item h4","#Huifold1 .item .info","fast",1,"click"); /*
+			5个参数顺序不可打乱，分别是：相应区,隐藏显示的内容,速度,类型,事件
+			类型 1 只打开一个，可以全部关闭 	2 必须有a一个打开	3 可打开多个
+		*/
+
+		layui.use('form', function(){
+			var form = layui.form;
+			form.on('checkbox(check-auth)', function(data){
+				var level_path = $(this).attr('level');
+				var path_arr = level_path.split('-');
+				var level = '';
+				if ($(this).is(':checked')) {
+					$('[class^=parent-' + level_path + ']').prop('checked', true);
+					for(var i = 0; i < path_arr.length; i++) {
+						level = level + path_arr[i] + '-';
+						var cur_level = level.substr(0, level.length-1);
+						$('[level='+cur_level+']').prop('checked', true);
+					}
+				} else {
+					$('[class^=parent-' + level_path + ']').prop('checked', false);
+				}
+				form.render('checkbox');
+			});
+		});
+	});
+
+</script>

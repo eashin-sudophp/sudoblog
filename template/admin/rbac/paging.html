@@ -1,0 +1,44 @@
+<div class="cl pd-5 bg-1 bk-gray">
+	<span class="l">
+		<button onclick="datadel_list(this)" class="layui-btn layui-btn-danger"><i class="Hui-iconfont">&#xe6e2;</i> {:lang('DELETE_BY_QUERY')}</button>
+		<button onclick="layer_show('{:lang(\'ADD_ROLE\')}','roleAdd.html','', '310')" class="layui-btn"><i class="Hui-iconfont">&#xe600;</i> {:lang('ADD_ROLE')}</button>
+	</span>
+	<span class="r">{:lang('A_TOTAL_OF')}：<strong>{$count}</strong> {:lang('NUMBER_OF')}</span>
+</div>
+<table class="table table-border table-bordered table-hover table-bg layui-form">
+	<thead>
+		<tr>
+			<th scope="col" colspan="6">{:lang('ROLES')}</th>
+		</tr>
+		<tr class="text-c">
+			<th width="40"><input type="checkbox" value="" lay-skin="primary" lay-filter="checkAll"></th>
+			<th>ID</th>
+			<th>{:lang('ROLE_NAME')}</th>
+			<th>{:lang('ROLE_USER_LIST')}</th>
+			<th>{:lang('ROLE_DESCRIPTION')}</th>
+			<th width="100">{:lang('ACTIONS')}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="roles" id="role">
+		<tr class="text-c">
+			<td><input type="checkbox" lay-skin="primary" <eq name="role.id" value="1">disabled<else/>value="{$role.id}"</eq>></td>
+			<td>{$role.id}</td>
+			<td>{$role.name}</td>
+			<td><a href="##">admin</a></td>
+			<td class="content-nowap">{$role.remark}</td>
+			<td class="f-14 td-manage">
+				<neq name="role.id" value='1'>
+					<a title="{:lang('EDIT')}" href="javascript:;" onclick="layer_show('{:lang(\'ROLE_EDIT\')}','{:url(\'Rbac/roleEdit\',[\'id\'=>$role.id])}','', '310')"><i class="Hui-iconfont">&#xe6df;</i></a>
+					<a title="{:lang('ROLE_SETTING')}" href="javascript:;" onclick="layer_show('{:lang(\'ROLE_SETTING\')}','{:url(\'Rbac/authorize\',[\'id\'=>$role.id])}','', '280')" class="ml-5"><i class="Hui-iconfont">&#xe63c;</i></a>
+					<a title="{:lang('DELETE')}" href="javascript:;" onclick="datadel_an('{$role.id}', this)" class="ml-5"><i class="Hui-iconfont">&#xe6e2;</i></a>
+				<else />
+					<a href="javascript:;" class="a-disabled"><i class="Hui-iconfont">&#xe6df;</i></a>
+					<a href="javascript:;" class="ml-5 a-disabled"><i class="Hui-iconfont disabled">&#xe63c;</i></a>
+					<a href="javascript:;" class="ml-5 a-disabled"><i class="Hui-iconfont disabled">&#xe6e2;</i></a>
+				</neq>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>

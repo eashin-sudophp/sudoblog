@@ -1,0 +1,57 @@
+<div class="cl pd-5 bg-1 bk-gray">
+	<span class="l">
+		<a onclick="datadel_list(this)" class="layui-btn layui-btn-danger"><i class="Hui-iconfont">&#xe6e2;</i> {:lang('DELETE_BY_QUERY')}</a>
+		<a href="add.html" class="layui-btn"><i class="Hui-iconfont">&#xe62d;</i>{:lang('ADD_ARTICLE')}</a>
+	</span>
+	<span class="r">{:lang('A_TOTAL_OF')}：<strong>{$count}</strong> {:lang('NUMBER_OF')}</span>
+</div>
+<table class="table table-border table-bordered table-bg table-hover table-sort table-responsive layui-form">
+	<thead>
+		<tr class="text-c">
+			<th width="40"><input type="checkbox" lay-skin="primary" lay-filter="checkAll"></th>
+			<th width="50">ID</th>
+			<th>{:lang('TITLE')}</th>
+			<th width="80">{:lang('CLASS')}</th>
+			<th width="80">{:lang('SOURCE')}</th>
+			<th width="80">{:lang('PUSH_TIME')}</th>
+			<th width="120">{:lang('UPDATE_TIME')}</th>
+			<th width="75">{:lang('VIEW_TIMES')}</th>
+			<th width="60">{:lang('PUSH_STATUS')}</th>
+			<th width="90">{:lang('ACTIONS')}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="list" id="article">
+			<tr class="text-c">
+				<td><input type="checkbox" lay-skin="primary" value="{$article.id}"></td>
+				<td>{$article.id}</td>
+				<td class="text-l content-nowap"><u style="cursor:pointer" class="text-primary1" onClick="article_edit('{:lang('LOOK_AT')}','article-zhang.html','{$article.id}')" title="{:lang('LOOK_AT')}">{$article.title}</u></td>
+				<td>{$article.cate_name}</td>
+				<td>{$article.source|default=get_empty()}</td>
+				<td>{$article.create_time|default=get_empty()}</td>
+				<td>{$article.update_time|default=get_empty()}</td>
+				<td>{$article.view_times}</td>
+				<td class="td-status">
+					<switch name="article.article_status">
+						<case value="0"><span class="layui-badge layui-bg-gray">{:lang('DEPOSIT_AS_DRAFT')}</span></case>
+						<case value="1"><span class="layui-badge layui-bg-green">{:lang('HAS_PUBLISH')}</span></case>
+						<case value="2"><span class="layui-badge layui-bg-cyan">{:lang('PRIVATE_ARTICLE')}</span></case>
+						<case value="3"><span class="layui-badge">{:lang('AUTO_DEPOSIT')}</span></case>
+						<case value="4"><span class="layui-badge layui-bg-orange">{:lang('HAS_FINISH')}</span></case>
+						<case value="5"><span class="layui-badge layui-bg-blue">{:lang('BE_PUBLISHING')}</span></case>
+					</switch>
+				</td>
+				<td class="f-14 td-manage">
+					<a href="javascript:;" title="{:lang('OFF_THE_SHELF')}"><i class="Hui-iconfont">&#xe6de;</i></a>
+					<a class="ml-5" href="edit/id/{$article.id}.html" title="{:lang('EDIT')}"><i class="Hui-iconfont">&#xe6df;</i></a>
+					<a class="ml-5" href="javascript:;" onclick="datadel_an('{$article.id}', this);" title="{:lang('DELETE')}"><i class="Hui-iconfont">&#xe6e2;</i></a>
+				</td>
+			</tr>
+		</volist>
+	</tbody>
+</table>
+<div class="pagination_box">
+	<div class="pagination_desc">{:lang('TOTAL_OF')} {$desc.current_page}/{$desc.last_page} {:lang('PAGE_OF')} {$desc.total} {:lang('NUMBER_OF_ROWS')}</div>
+	{$page}
+	<div style="clear: both;"></div>
+</div>
