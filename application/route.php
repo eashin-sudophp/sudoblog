@@ -31,4 +31,4 @@ Route::get('/[:page]','Index/index/', [], ['page'=>'\d+']);
 Route::get('/:cate/[:page]','Article/category/', [], ['cate'=>'((?!admin)(?!api).)+', 'page'=>'\d+']);
 
 // 前台文章
-Route::get('/:cate/:article','Article/index/', [], ['cate'=>'((?!admin)(?!api).)+', 'article'=>'\w+']);
+Route::get('/:cate/:article','Article/index/', [], ['cate'=>'((?!admin)(?!api).)+', 'article'=>'.+']);

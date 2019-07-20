@@ -109,6 +109,10 @@
      */
     function image_thumbnail($img_url, $size="150x150")
     {
+        $img_link = str_replace('https://', 'http://', $img_url);
+        $domain = str_replace('https://', 'http://',request()->domain());
+        if ((strpos($img_link, $domain) === false) && strpos($img_link, 'http') === 0) return $img_url;
+        if (strpos($img_link, $domain)=== 0)$img_url = str_replace($domain, '', $img_link);
         $image = \think\Image::open('.' . $img_url);
         $thumb_path = "./_mystorage/thumbnail/";
         $storage = $thumb_path . str_replace(array('/', '\\'),'', str_replace('.', "_$size.", $img_url));

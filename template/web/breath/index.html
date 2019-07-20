@@ -8,7 +8,7 @@
 						<div class="post post-layout-list js-gallery" data-aos="fade-up">
 							<div class="post-album">
 								<div class="row content">
-									<div class="bg" style="background-image: url({$item.thumbnail ?: ($domain . '/static/images/thumb/'.$item.update_time%9 . '.jpg')});"></div>
+									<div class="bg" style="background: #5fd5e4;"></div>
 									<div class="contentext flex-xs-middle">
 										<div class="album-title">
 											<a href="{$domain}/{$item.cate_alias}/{$item.brief_title}.html">{$item.title}</a>
@@ -20,7 +20,7 @@
 										<div class="row album-thumb no-gutter">
 											<php>$tmp_img = preg_match_img($item['content'], 5);</php>
 											<foreach $tmp_img as $v>
-												<div class="col-xs-4"><img class="thumb" src="{$v|image_thumbnail='200x200'}" /></div>
+												<div class="col-xs-4"><img width="100%" class="thumb" src="{$v|image_thumbnail='100x100'}" /></div>
 											</foreach>
 											<div class="col-xs-4">
 												<a href="{$domain}/{$item.cate_alias}/{$item.brief_title}.html">5 pics</a>
@@ -62,7 +62,7 @@
 										</div>
 									</div>
 									<div class="review-bg-wrapper">
-										<div class="bg-blur" style="background: url({$domain}/static/images/repeat/repeat_1.jpg) 0 0/40px 40px repeat"></div>
+										<div class="bg-blur" style="background: #b1b1b1;"></div>
 									</div>
 								</div>
 								<div class="post-container">

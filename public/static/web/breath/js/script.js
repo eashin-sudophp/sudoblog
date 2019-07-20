@@ -66,7 +66,7 @@ document.body.addEventListener('touchstart', function(){ });
 	});
 		
 	// Menu	pc view	
-	$('.navi').addClass('open close');
+	$('.navi').addClass('open');
 	$('.bt-nav').click( function() {
 		$(this).parent().toggleClass( function() {
 		  if ( $(this).hasClass('open') ) {

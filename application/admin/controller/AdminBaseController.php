@@ -18,7 +18,7 @@ class AdminBaseController extends Controller
 
         // 标签替换
         foreach (config('view_replace_str') as $key => $value) {
-            config('view_replace_str.' . $key, 'http://' . $_SERVER['HTTP_HOST'] . $value);
+            config('view_replace_str.' . $key, request()->domain() . $value);
         }
 
         parent::__construct();

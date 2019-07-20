@@ -3,6 +3,7 @@ namespace app\api\controller;
 
 use common\Common;
 use common\Errcode;
+use common\Uploader;
 use Qiniu\Qiniu;
 use think\Db;
 

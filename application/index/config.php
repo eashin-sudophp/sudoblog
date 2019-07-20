@@ -35,5 +35,7 @@ return [
 	    '__LIB__' => '/lib',
 	    '__ADMIN__' => '/static/admin',
 	],
-
+    
+   // 静态资源cdn加速根目录
+   'cdn_domain' => 'https://cdn.sudophp.com'
 ];

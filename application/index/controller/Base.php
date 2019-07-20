@@ -24,8 +24,10 @@ class Base extends Controller
 
         // 菜单
         $nav = Db::name('ArticleCategory')->select();
+
         $this->assign('nav', beTree($nav));
         $this->assign('domain', request()->domain());
+        $this->assign('cdn_domain', config('cdn_domain'));
         $this->assign('template_header', $this->template_name . '/header');
         $this->assign('template_footer', $this->template_name . '/footer');
 
