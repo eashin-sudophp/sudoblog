@@ -2,6 +2,7 @@
 namespace app\admin\controller;
 
 use app\admin\model\Article;
+use app\admin\model\ArticleTagRecord;
 
 class ArticleController extends AdminBaseController
 {
@@ -103,7 +104,11 @@ class ArticleController extends AdminBaseController
 	{
         $list = db('ArticleCategory')->select() ?: [];
         $cate = beTree($list);
+
+        $tags = model('ArticleTag')->select() ?: [];
+
         $this->assign('cates', $cate);
+        $this->assign('tags', $tags);
 		return $this->fetch();
 	}
 
@@ -154,10 +159,16 @@ class ArticleController extends AdminBaseController
 		$msg = $draft ? lang('CONSERVATION') : lang('PUBLISH');
 
         $articleModel = new Article($param);
-        if ($articleModel->allowField(true)->save())
-			$this->success($msg.lang('SUCCESS'), '', ['id' => $articleModel->id]);
-		else
-			$this->error($msg.lang('FAILED'));
+        if ($articleModel->allowField(true)->save()) {
+            // 增加文章标签
+            $article_tag = input('article_tag/a', []);
+            foreach ($article_tag as $item) {
+                ArticleTagRecord::create(['aid'=>$id, 'tid'=>$item]);
+            }
+            $this->success($msg.lang('SUCCESS'), '', ['id' => $articleModel->id]);
+        }  else {
+            $this->error($msg.lang('FAILED'));
+        }
 	}
 
 	/**
@@ -168,9 +179,13 @@ class ArticleController extends AdminBaseController
 	    $id = input('id', 0, 'intval');
 	    $row = db('Article')->where('id', $id)->find();
 	    if (!empty($id) && !empty($row)) {
+            $tags = model('ArticleTag')->select() ?: [];
+            $article_tags = model('ArticleTagRecord')->where('aid', $id)->column('tid') ?: [];
             $list = db('ArticleCategory')->select() ?: [];
 	        $cate = beTree($list);
-	        $this->assign('cates', $cate);
+            $this->assign('cates', $cate);
+            $this->assign('tags', $tags);
+            $this->assign('article_tags', $article_tags);
             $this->assign('row', $row);
             return $this->fetch('add');
         }
@@ -181,7 +196,6 @@ class ArticleController extends AdminBaseController
 	 */
 	public function editPost()
 	{
-
         // 文章编号
         $id = input('id', 0, 'intval');
         $articleModel = Article::get($id);
@@ -230,10 +244,17 @@ class ArticleController extends AdminBaseController
         $param['auto_hold'] = $auto_hold;
 
         $msg = $draft ? lang('CONSERVATION') : lang('PUBLISH');
-        if ($articleModel->allowField(true)->save($param) !== false)
+        if ($articleModel->allowField(true)->save($param) !== false) {
+            // 修改文章标签
+            $article_tag = input('article_tag/a', []);
+            ArticleTagRecord::where('aid', $id)->delete();
+            foreach ($article_tag as $item) {
+                ArticleTagRecord::create(['aid'=>$id, 'tid'=>$item]);
+            }
             $this->success($msg.lang('SUCCESS'));
-        else
+        } else {
             $this->error($msg.lang('FAILED'));
+        }
 
 	}
 

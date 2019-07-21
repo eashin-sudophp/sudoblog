@@ -210,7 +210,6 @@ $(function(){
 function form_ajax_submit(){
 
     $(document).on('click', '.js-ajax-submit', function(){
-
         // 验证数据
         if (!check_validate())
             return false;
@@ -271,6 +270,43 @@ function form_ajax_submit(){
                             }
                         }, 1200);// 延迟1秒跳转到返回链接
                     }
+                }
+            }
+        })
+        return false;
+    })
+
+    // 编辑文章时添加文章标签
+    $(document).on('click', '.js-ajax-addtag', function(){
+        // 验证数据
+        if (!check_validate())
+            return false;
+
+        // 上锁
+        if (!submit_lock && !$(this).hasClass('js-test'))
+            return false;
+        else
+            submit_lock = false;
+
+        var form = $('.js-ajax-form');
+        var action = form.attr('action');
+
+        $.ajax({
+            type: 'POST',
+            url:  action,
+            data: form.serialize(),
+            dataType:'json',
+            success:function(data){
+                if (data.code == 0) {
+                    submit_lock = true;
+                    fail_alert(data.msg); // 失败
+                } else {
+                    $(window.parent.document).find('.tagthree').append('<input type="checkbox" name="article_tag[]" title="'+data.data.tag_name+'" value="'+data.data.id+'">');
+                    window.parent.layui_form_effect();
+                    ok_alert(data.msg); // 成功
+                    setTimeout(function(){
+                        parent.layer.closeAll();
+                    }, 1200)
                 }
             }
         })

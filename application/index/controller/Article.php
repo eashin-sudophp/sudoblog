@@ -13,11 +13,17 @@ class Article extends Base
 
     	$article_detail = Db::name('Article')->where(['brief_title' => $article, 'cate_id' => $cate_detail['id'] ?? ''])->find();
 
+    	// 404
     	if (empty($cate_detail) || empty($article_detail)) {
     	    return $this->fetch_temp('404');
         }
 
+        // 作者
         $article_detail['author'] = Db('AdminUser')->where(['id' => $article_detail['author']])->value('user_nickname');
+
+    	// 文章分类
+        $article_detail['category_level'] = model('app\admin\model\ArticleCategory')->getParentCates($cate_detail['id']);
+
         $this->assign('article', $article_detail);
         return $this->fetch_temp('detail');
     }
@@ -32,6 +38,7 @@ class Article extends Base
             ->field('Article.*, cate.cate_alias')
             ->join('ArticleCategory cate', 'Article.cate_id = cate.id', 'LEFT')
             ->where('cate.cate_alias', $cate)
+            ->order('create_time desc')
             ->paginate(10, true);
 
     	// 当前分类详情

@@ -1,0 +1,117 @@
+<style>
+			b {
+				font-weight: normal;
+			}
+			.transform-icon {
+				transform: rotate(90deg);
+				position: absolute;
+				transition-duration: 0.3s;
+				transition-property: all;
+				line-height: 38px;
+				margin-left: -8px;
+			}
+			.item-hide {
+				display: none;
+			}
+			.fixed-top {
+				position: fixed;
+				top: 0px;
+				width: 100%;
+				box-shadow: 0px 2px 5px #e5e5e5;
+			}
+			.fixed-top+article {
+				padding-top: 60px;
+			}
+		</style>
+</head>
+<body>
+<nav class="breadcrumb fixed-top">
+	<i class="Hui-iconfont Hui-iconfont-fenlei"></i> <a href="javascript:parent.layer.closeAll()"> <empty name='row'>{:lang('ADD_TAG')}<else/>{:lang('TAG_DETAIL')}</empty></a>
+</nav>
+<article class="page-container">
+	<form action="<empty name='row'>{:url('Tag/addPost')}<else/>{:url('Tag/editPost')}</empty>" method="post" class="form form-horizontal js-ajax-form layui-form">
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2"><span class="c-red">*</span>{:lang("TAG_NAME")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<input type="text" class="layui-input js-require js-chs" value="{$row.tag_name|default=''}" placeholder="tag_name" name="tag_name" maxlength="30" autocomplete="off">
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="formControls col-xs-12 col-sm-10" style="text-align: center; ">
+				<span class="layui-btn layui-btn-primary expend-btn" next-hide="1"><i class="layui-icon transform-icon">&#xe65b;</i> &nbsp;&nbsp;&nbsp;&nbsp;<b>{:lang('CLICK_AND_EXPEND_SHRINK', ['expend' => lang('EXPEND')])}</b></span>
+			</div>
+		</div>
+
+
+
+	<div style="display:none;">
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("SEO_TITLE")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<input type="text" class="layui-input js-chs" value="{$row.seo_title|default=''}" placeholder="seo_title" name="seo_title" maxlength="100" autocomplete="off">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("SEO_KEYWORDS")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<textarea name="seo_keyword" class="layui-textarea" maxlength="200" placeholder="seo_keyword" onKeyUp="$(this).next().find('em').html(this.value.length)">{$row.seo_keyword|default=''}</textarea>
+				<p class="textarea-numberbar"><em class="textarea-length"><notempty name='row.seo_keyword'>{$row.seo_keyword|mb_strlen}<else/>0</notempty></em>/200</p>
+			</div>
+			<span class="layui-word-aux col-sm-3">{:lang('SEO_KEYWORDS_TIPS')}</span>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("SEO_DESCRIPTION")}</label>
+			<div class="formControls col-xs-8 col-sm-7">
+				<textarea name="seo_description" class="layui-textarea" maxlength="200" placeholder="seo_description" onKeyUp="$(this).next().find('em').html(this.value.length)">{$row.seo_description|default=''}</textarea>
+				<p class="textarea-numberbar"><em class="textarea-length"><notempty name='row.seo_description'>{$row.seo_description|mb_strlen}<else/>0</notempty></em>/200</p>
+			</div>
+		</div>
+	</div>
+
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("STATUS")}</label>
+			<div class="formControls col-xs-8 col-sm-7 skin-minimal-">
+				<input type="checkbox" name="status" lay-skin="switch" lay-text="ON|OFF" value="1" <if condition="!isset($row['status']) OR $row['status'] neq 0">checked</if> />
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label my-label col-xs-4 col-sm-2">{:lang("SORT")}</label>
+			<div class="formControls col-xs-8 col-sm-2">
+				<input type="number" class="layui-input js-number" value="{$row.list_order|default=''}" placeholder="list_order" name="list_order" max="10000" min="0" autocomplete="off">
+			</div>
+		</div>
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-7 col-xs-offset-4 col-sm-offset-2">
+				<notempty name='row'><input type="hidden" name="id" value="{$row.id}"/></notempty>
+				<button class="layui-btn <if condition="input('type') eq 'add_article_tag'">js-ajax-addtag<else/>js-ajax-submit</if> js-test <empty name='row'>js-add</empty>">{:lang('ONSUBMIT')}</button>
+      			<button type="reset" class="layui-btn layui-btn-primary">{:lang('RESET')}</button>
+				{$Think.get.type}
+			</div>
+		</div>
+	</form>
+</article>
+<script>
+    var click_auth = 1;
+	$(".expend-btn").click(function(){
+		if (click_auth != 1) {
+			return false;
+		}
+		click_auth = 0;
+		var num = $(this).attr('next-hide-num');
+		if ($(this).attr('next-hide') == 1) {
+			$(this).attr('next-hide', 0).find('i').css('transform', 'rotate(270deg)');
+			$(this).find('b').html('{:lang("CLICK_AND_EXPEND_SHRINK", ["expend" => lang("SHRINK")])}');
+			$(this).parents('.row').next().slideDown(700, function () {
+				click_auth = 1;
+			});
+		} else {
+			$(this).attr('next-hide', 1).find('i').css('transform', 'rotate(90deg)');
+			$(this).find('b').html('{:lang("CLICK_AND_EXPEND_SHRINK", ["expend" => lang("EXPEND")])}');
+			$(this).parents('.row').next().slideUp(700, function () {
+				click_auth = 1;
+			});
+		}
+	});
+
+</script>

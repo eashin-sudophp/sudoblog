@@ -18,6 +18,24 @@
 	text-indent: 0
 }
 
+@font-face {
+  font-family: 'articleicon';
+  src: url('fonts/articleicon.eot');
+  src: url('fonts/articleicon.eot?#iefix') format('embedded-opentype'),
+      url('fonts/articleicon.woff2') format('woff2'),
+      url('fonts/articleicon.woff') format('woff'),
+      url('fonts/articleicon.ttf') format('truetype'),
+      url('fonts/articleicon.svg#articleicon') format('svg');
+}
+
+.articleicon {
+  font-family: "articleicon" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .hermit,
 .hermit * {
 	box-sizing: content-box;

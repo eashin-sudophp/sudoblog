@@ -195,6 +195,9 @@ return [
     'CURRENT_PROCESS'                    => '进程用户名',
     'SERVER_LANGUAGE'                    => '服务器语言',
     'FREE_SPACE'                         => '剩余空间',
+    'SEO_TITLE'                          => 'SEO标题',
+    'SEO_KEYWORDS'                       => 'SEO关键字',
+    'SEO_DESCRIPTION'                    => 'SEO描述',
 
     // 菜单相关
     'TOP_LEVEL_MENU'                     => '顶级菜单',
@@ -330,6 +333,16 @@ return [
     'DELETE_FAILED_WITH_SON_CATE'        => '不能删除有子栏目的项目',
     'DELETE_FAILED_WITH_CATE_ARTICLE'    => '不能删除存在文章的栏目',
     'ARTICLE_HAS_PUBLISH'                => '文章已发布，无法保存为草稿',
+
+
+    // 文章标签
+    'ADD_TAG'                            => '添加文章标签',
+    'ARTICLE_TAG'                        => '文章标签',
+    'TAG_NAME'                           => '标签名称',
+    'TAG_ALIAS'                          => '标签别名',
+    'TAG_DETAIL'                         => '标签详情',
+    'TAG_EDIT'                           => '标签编辑',
+    'DELETE_FAILED_WITH_TAG_ARTICLE'     => '不能删除存在文章的文章标签',
 
 
 ];

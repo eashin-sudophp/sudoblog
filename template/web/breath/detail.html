@@ -1,4 +1,80 @@
+<style type="text/css">
+	.content-title{
+		background: #fff;
+		box-shadow: 0px 5px 8px #999;
+		margin-bottom: 20px !important;
+		padding: 75px 30px 0;
+
+	}
+	.content-title h2 {
+		margin: 0px;
+		font-size: 22px;
+		line-height: 48px;
+		border-bottom: 1px dotted #fff;
+	    padding-left: 10px;
+	    border-left: 4px solid #2175bc;
+	}
+
+
+	.button-content:before{
+        content:'';
+        width:20px;
+        height: 0%;
+        border: 15px solid;
+        border-color: transparent transparent transparent #2175bc;
+        position: absolute;
+        top: 0px;
+        right:-30px;
+    }
+    .button-content{
+    	color: #fff;
+        height: 30px;
+        background-color: #2175bc;
+        font-size: small;
+        line-height: 30px;
+        text-align: center;
+        position: absolute;
+        top: 28px;
+        left: -15px;
+        min-width: 100px;
+        padding: 0px 30px;
+    }
+    .button-content:after{
+        content:'';
+        width:10px;
+        border: 15px solid;
+        border-color: transparent #2b4250 transparent transparent ;
+        border-top: 0;
+        left: -15px;
+        position: absolute;/*使伪元素脱离文档流，使伪元素不受div内容的影响,便于计算位置，此时after相对于div的左上角进行定位*/
+        top: 30px;
+    }
+	.button-content a{
+		color: #fff;
+	}
+    .article-nature {
+    	display: inline-block;
+    	margin: 20px 15px 20px 0;
+    	font-size: 12px;
+    }
+</style>
 <div id="main" class="content">
+	<div class="content-title post">
+		<span class="button-content">
+			<i class="articleicon">&#xe50d;</i> <a href="{$domain}/">首页</a> /
+			<volist name="article.category_level" id="vo">
+				<a href="{$domain}/{$vo.cate_alias}.html">{$vo.cate_name}</a>
+				<neq name="article.category_level|count" value="$i">/</neq>
+			</volist>
+		</span>
+		<h2>{$article.title}</h2>
+		<span class="article-nature" title="发布时间"><i class="articleicon">&#xe60d;</i> {$article.create_time|date="Y-m-d", ###} </span>
+		<span class="article-nature" title="最后修改人"><i class="articleicon">&#xe605;</i> {$article.author} </span>
+		<span class="article-nature" title="浏览数"><i class="articleicon">&#xe635;</i> {$article.view_times} </span>
+		<span class="article-nature" title="评论数"><i class="articleicon">&#xe6b3;</i> 3 </span>
+		<span class="article-nature" title="标签"><i class="articleicon">&#xe613;</i> 标签1, 标签2 </span>
+
+	</div>
 	<div class="container">
 		<article id="post-1202" class="js-gallery post-1202 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized tag-11 tag-22 tag-29">
 			<style>
@@ -124,7 +200,7 @@
 			<div class="arrow"><i class="iconfont">&#xe625;</i></div>
 			<div class="preview">
 				<div class="pull-left featuredImg" style="background-image:url({$domain}/static/web/breath/images/97a354cb9519f97e84139f26017386026b3fd7f517b96-DCDbdE-250x250.jpeg');"></div>
-				<a class="pull-left preview-content bold" href="#"><span>《别哭妈妈》</span></a>
+				<a class="pull-left preview-content bold" href="#"><span>php</span></a>
 			</div>
 		</div>
 		<div class="next" data-aos="slide-left" data-aos-delay="1.5s">

@@ -95,7 +95,7 @@ class CategoryController extends AdminBaseController
         }
 
         unset($param['parent_id']);
-        if (db('ArticleCategory')->update($param) === false) {
+        if (db('ArticleCategory')->update(clear_empty($param)) === false) {
             $this->error(lang('EDIT_FAILED'));
         }
 

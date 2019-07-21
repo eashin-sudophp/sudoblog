@@ -11,6 +11,7 @@ class Index extends Base
     		->alias('Article')
             ->field('Article.*, cate.cate_alias')
             ->join('ArticleCategory cate', 'Article.cate_id = cate.id', 'LEFT')
+            ->order('create_time desc')
             ->paginate(10, true);
 
         $this->assign('articles', $articles->toArray()['data']);
