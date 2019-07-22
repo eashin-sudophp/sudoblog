@@ -94,6 +94,22 @@ www  WEB部署目录（或者子目录）
 3. 后台登录默认为admin 123456；
 4. 需要开启mod_rewrite；
 5. 添加后台模板到/template/web/xxx/,静态资源放到/public/static/web/xxx/下（xxx为前端模板的名称，模板文件命名参考上述目录结构）
+6. 数据库配置文件及.htaccess文件请自行添加，前者请参考，[传送门](https://www.kancloud.cn/manual/thinkphp5/118027)  
+后者参考如下：
+```
+<IfModule mod_rewrite.c>
+  Options +FollowSymlinks -Multiviews
+  RewriteEngine On
+
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.*)$ index.php?/$1 [QSA,PT,L]
+
+  RewriteBase /
+  RewriteCond %{SERVER_PORT} !^443$
+  RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [L,R=301]
+</IfModule>
+```
 
 ## 链接结构说明
 
@@ -134,7 +150,7 @@ jquery: https://jquery.com/
 layui: https://www.layui.com/  
 h-ui: http://www.h-ui.net/  
 
-本博客不足之处敬请指正，小弟抱紧各位大佬的大腿，不断去完善改进sudoblog。(by Eashin)  
+本博客不足之处敬请指正，小弟抱紧各位大大的大腿，不断去完善改进sudoblog。(by Eashin)  
 偶会一直成长滴。(by Sudoblog)  
 
 

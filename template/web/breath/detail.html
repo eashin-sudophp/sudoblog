@@ -72,7 +72,7 @@
 		<span class="article-nature" title="最后修改人"><i class="articleicon">&#xe605;</i> {$article.author} </span>
 		<span class="article-nature" title="浏览数"><i class="articleicon">&#xe635;</i> {$article.view_times} </span>
 		<span class="article-nature" title="评论数"><i class="articleicon">&#xe6b3;</i> 3 </span>
-		<span class="article-nature" title="标签"><i class="articleicon">&#xe613;</i> 标签1, 标签2 </span>
+		<span class="article-nature" title="标签"><i class="articleicon">&#xe613;</i> <foreach name="article.tag" item="vo"><a href="{$domain}/tag/{$vo.id}.html">{$vo.tag_name}</a> </foreach> </span>
 
 	</div>
 	<div class="container">
@@ -157,7 +157,7 @@
 								<span aria-current='page' class='page-numbers current'>4</span></nav>
 					<div id="respond" class="comment-respond">
 						<h6 id="replytitle" class="comment-reply-title"><a rel="nofollow" id="cancel-comment-reply-link" href="" style="display:none;">取消</a></h6>
-						<form action="#" method="post" id="commentform" class="clearfix">
+						<form action="/" method="post" id="commentform" class="clearfix">
 							<div class="clearfix"></div>
 							<div class="author-info">
 								<input type="text" name="author" id="author" placeholder="昵  称 : " value="" tabindex="1" title="Name (required)" />

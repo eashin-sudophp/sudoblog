@@ -4,6 +4,7 @@
 /runtime
 /vendor
 .idea
+.htaccess
 composer.lock
 *.log
 database.php
