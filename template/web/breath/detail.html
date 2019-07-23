@@ -3,7 +3,7 @@
 		background: #fff;
 		box-shadow: 0px 5px 8px #999;
 		margin-bottom: 20px !important;
-		padding: 75px 30px 0;
+		padding: 75px 30px 10px;
 
 	}
 	.content-title h2 {
@@ -57,6 +57,12 @@
     	margin: 20px 15px 20px 0;
     	font-size: 12px;
     }
+    .article-nature a{
+        color: inherit;
+    }
+    .article-nature a:hover {
+    	color: #bebbaa;
+    }
 </style>
 <div id="main" class="content">
 	<div class="content-title post">
@@ -72,7 +78,7 @@
 		<span class="article-nature" title="最后修改人"><i class="articleicon">&#xe605;</i> {$article.author} </span>
 		<span class="article-nature" title="浏览数"><i class="articleicon">&#xe635;</i> {$article.view_times} </span>
 		<span class="article-nature" title="评论数"><i class="articleicon">&#xe6b3;</i> 3 </span>
-		<span class="article-nature" title="标签"><i class="articleicon">&#xe613;</i> <foreach name="article.tag" item="vo"><a href="{$domain}/tag/{$vo.id}.html">{$vo.tag_name}</a> </foreach> </span>
+		<notempty name="article['tag']"><span class="article-nature" title="标签"><i class="articleicon">&#xe613;</i> <foreach name="article.tag" item="vo"><a href="{$domain}/tag/{$vo.id}.html">{$vo.tag_name}</a> </foreach> </span></notempty>
 
 	</div>
 	<div class="container">

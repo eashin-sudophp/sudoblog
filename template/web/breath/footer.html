@@ -28,11 +28,27 @@
         <a href="">Eashin</a>
     </div>
     <script type='text/javascript' src='{$cdn_domain}/static/web/breath/js/jquery.min.js'></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
     <script type='text/javascript' src='{$cdn_domain}/static/web/breath/js/plugins.js'></script>
     <script type='text/javascript' src='{$domain}/static/web/breath/js/script.js'></script>
     <script type='text/javascript' src='{$domain}/static/web/breath/js/particles.js'></script>
     <script type='text/javascript' src='{$domain}/static/web/breath/js/aos.js'></script>
+    <script type='text/javascript' src='{$domain}/static/js/uescript.js'></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/tomorrow-night-blue.min.css">
 
 </body>
-
+<script type="text/javascript">
+    $(function(){
+        $.each($('pre'), function(index, item){
+            var className = $(item).attr('class');
+            if (typeof(className) != 'undefined' && className.indexOf('brush:') != -1) {
+                var thisLanguage = className.match(/brush:(\S+?);/);
+                if (thisLanguage) {
+                    $(item).html('<code class="'+thisLanguage[0]+' hljs">'+$(item).html()+'</code>')
+                }
+            }
+        })
+    })
+</script>
 </html>

@@ -1,4 +1,85 @@
+<style type="text/css">
+    .content-title{
+        background: #fff;
+        box-shadow: 0px 5px 8px #999;
+        margin-bottom: 20px !important;
+        padding: 75px 30px 10px;
+
+    }
+    .content-title h2 {
+        margin: 0px;
+        font-size: 22px;
+        line-height: 48px;
+        border-bottom: 1px dotted #fff;
+        padding-left: 10px;
+        border-left: 4px solid #2175bc;
+    }
+
+
+    .button-content:before{
+        content:'';
+        width:20px;
+        height: 0%;
+        border: 15px solid;
+        border-color: transparent transparent transparent #2175bc;
+        position: absolute;
+        top: 0px;
+        right:-30px;
+    }
+    .button-content{
+        color: #fff;
+        height: 30px;
+        background-color: #2175bc;
+        font-size: small;
+        line-height: 30px;
+        text-align: center;
+        position: absolute;
+        top: 28px;
+        left: -15px;
+        min-width: 100px;
+        padding: 0px 30px;
+    }
+    .button-content:after{
+        content:'';
+        width:10px;
+        border: 15px solid;
+        border-color: transparent #2b4250 transparent transparent ;
+        border-top: 0;
+        left: -15px;
+        position: absolute;/*使伪元素脱离文档流，使伪元素不受div内容的影响,便于计算位置，此时after相对于div的左上角进行定位*/
+        top: 30px;
+    }
+    .button-content a{
+        color: #fff;
+    }
+    .article-nature {
+        display: inline-block;
+        margin: 20px 15px 20px 0;
+        font-size: 12px;
+    }
+    .article-nature a{
+        color: inherit;
+    }
+    .article-nature a:hover {
+        color: #bebbaa;
+    }
+</style>
 <div id="main" class="content">
+    <div class="content-title post">
+        <span class="button-content">
+            <i class="articleicon">&#xe50d;</i> <a href="{$domain}/">首页</a> /
+            <present name="category_level">
+                <volist name="category_level" id="vo">
+                    <a href="{$domain}/{$vo.cate_alias}.html">{$vo.cate_name}</a>
+                    <neq name="category_level|count" value="$i">/</neq>
+                </volist>
+            <else/>
+                网站标签
+            </present>
+            
+        </span>
+        <h2>{$row['name']}</h2>
+    </div>
     <div class="container">
         <article itemscope="itemscope">
             <div class="posts-list js-posts">
@@ -8,7 +89,7 @@
                         <div class="post post-layout-list js-gallery" data-aos="fade-up">
                             <div class="post-album">
                                 <div class="row content">
-                                    <div class="bg" style="background-image: url({$item.thumbnail ?: ($domain . '/static/images/thumb/'.$item.update_time%9 . '.jpg')});"></div>
+                                    <div class="bg" style="background: #5fd5e4;"></div>
                                     <div class="contentext flex-xs-middle">
                                         <div class="album-title">
                                             <a href="{$domain}/{$item.cate_alias}/{$item.brief_title}.html">{$item.title}</a>
@@ -20,7 +101,7 @@
                                         <div class="row album-thumb no-gutter">
                                             <php>$tmp_img = preg_match_img($item['content'], 5);</php>
                                             <foreach $tmp_img as $v>
-                                                <div class="col-xs-4"><img class="thumb" src="{$v|image_thumbnail='200x200'}" /></div>
+                                                <div class="col-xs-4"><img width="100%" class="thumb" src="{$v|image_thumbnail='100x100'}" /></div>
                                             </foreach>
                                             <div class="col-xs-4">
                                                 <a href="{$domain}/{$item.cate_alias}/{$item.brief_title}.html">5 pics</a>
@@ -30,11 +111,11 @@
                                 </div>
                             </div>
                         </div>
-                        <elseif condition="$item['update_time']%2 != 0"/>
-                        <!--更新日期是奇数-->
+                        <elseif condition="empty($item['thumbnail'])"/>
+                        <!--无预览图-->
                         <div class="post post-layout-list" data-aos="fade-up">
                             <div class="status_list_item icon_kyubo">
-                                <div class="status_user" style="background-image:  url({$item.thumbnail ?: ($domain . '/static/images/thumb/'.$item.update_time%9 . '.jpg')});">
+                                <div class="status_user" style="background:  url({$domain}/static/images/repeat/repeat_1.jpg) 0 0/40px 40px repeat">
                                     <div class="status_section">
                                         <a href="{$domain}/{$item.cate_alias}/{$item.brief_title}.html" class="status_btn">{$item.title}</a>
                                         <p class="section_p"> {$item.summary?:mysubstr($item.content_basic,220)} </p>
@@ -43,14 +124,14 @@
                             </div>
                         </div>
                         <else/>
-                        <!--更新日期是偶数-->
+                        <!--有预览图-->
                         <div class="post post-layout-list" data-aos="fade-up">
                             <div class="postnormal review ">
                                 <div class="post-container review-item">
                                     <div class="row review-item-wrapper">
                                         <div class="col-sm-3">
                                             <a rel="nofollow" href="{$domain}/{$item.cate_alias}/{$item.brief_title}.html">
-                                                <div class="review-item-img" style="background-image: url({$item.thumbnail ?: ($domain . '/static/images/thumb/'.$item.update_time%9 . '.jpg')});"></div>
+                                                <div class="review-item-img" style="background-image: url({$item.thumbnail|image_thumbnail='130x190'});"></div>
                                             </a>
                                         </div>
                                         <div class="col-sm-9 flex-xs-middle">
@@ -62,7 +143,7 @@
                                         </div>
                                     </div>
                                     <div class="review-bg-wrapper">
-                                        <div class="bg-blur" style="background-image: url({$item.thumbnail ?: ($domain . '/static/images/thumb/'.$item.update_time%9 . '.jpg')});"></div>
+                                        <div class="bg-blur" style="background: #b1b1b1;"></div>
                                     </div>
                                 </div>
                                 <div class="post-container">
