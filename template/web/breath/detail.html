@@ -1,69 +1,24 @@
-<style type="text/css">
-	.content-title{
-		background: #fff;
-		box-shadow: 0px 5px 8px #999;
-		margin-bottom: 20px !important;
-		padding: 75px 30px 10px;
+<!--SyntaxHighlighter的基本脚本-->
+<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shCore.js"></script>
+<!--SyntaxHighlighter的对各个编程语言解析的脚本-->
+<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.js"></script>
+<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushPhp.js"></script>
+<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushJava.js"></script>
+<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushCSharp.js"></script>
+<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushCpp.js"></script>
+<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushAS3.js"></script>
+<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushPython.js"></script>
+<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushVb.js"></script>
+<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushSql.js"></script>
+<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushXml.js"></script>
+<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushPlain.js"></script>
+<!--所使用的SyntaxHighlighter样式-->
+<link href="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/styles/shCoreDjango.css" rel="stylesheet">
+<!--初始化SyntaxHighlighter的必须代码，必须放在head中，引入文件之后-->
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<!--用于消除右上角的广告-->
+<script type="text/javascript">SyntaxHighlighter.defaults['toolbar'] = false;</script>
 
-	}
-	.content-title h2 {
-		margin: 0px;
-		font-size: 22px;
-		line-height: 48px;
-		border-bottom: 1px dotted #fff;
-	    padding-left: 10px;
-	    border-left: 4px solid #2175bc;
-	}
-
-
-	.button-content:before{
-        content:'';
-        width:20px;
-        height: 0%;
-        border: 15px solid;
-        border-color: transparent transparent transparent #2175bc;
-        position: absolute;
-        top: 0px;
-        right:-30px;
-    }
-    .button-content{
-    	color: #fff;
-        height: 30px;
-        background-color: #2175bc;
-        font-size: small;
-        line-height: 30px;
-        text-align: center;
-        position: absolute;
-        top: 28px;
-        left: -15px;
-        min-width: 100px;
-        padding: 0px 30px;
-    }
-    .button-content:after{
-        content:'';
-        width:10px;
-        border: 15px solid;
-        border-color: transparent #2b4250 transparent transparent ;
-        border-top: 0;
-        left: -15px;
-        position: absolute;/*使伪元素脱离文档流，使伪元素不受div内容的影响,便于计算位置，此时after相对于div的左上角进行定位*/
-        top: 30px;
-    }
-	.button-content a{
-		color: #fff;
-	}
-    .article-nature {
-    	display: inline-block;
-    	margin: 20px 15px 20px 0;
-    	font-size: 12px;
-    }
-    .article-nature a{
-        color: inherit;
-    }
-    .article-nature a:hover {
-    	color: #bebbaa;
-    }
-</style>
 <div id="main" class="content">
 	<div class="content-title post">
 		<span class="button-content">
@@ -198,7 +153,7 @@
 </div>
 
 <div class="p-header">
-	<figure class="p-image" style="background-image: url({$domain}/static/web/breath/images/47fb3c_9afed6c259f94589881bd55376206366mv2_d_3840_5784_s_4_2.jpg);"></figure>
+	<figure class="p-image" style=""></figure>
 </div>
 <div class="navpost-part">
 	<div id="NextPrevPosts">
@@ -218,23 +173,3 @@
 		</div>
 	</div>
 </div>
-<!--SyntaxHighlighter的基本脚本-->
-<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shCore.js"></script>
-<!--SyntaxHighlighter的对各个编程语言解析的脚本-->
-<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.js"></script>
-<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushPhp.js"></script>
-<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushJava.js"></script>
-<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushCSharp.js"></script>
-<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushCpp.js"></script>
-<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushAS3.js"></script>
-<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushPython.js"></script>
-<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushVb.js"></script>
-<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushSql.js"></script>
-<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushXml.js"></script>
-<script src="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushPlain.js"></script>
-<!--所使用的SyntaxHighlighter样式-->
-<link href="https://cdn.bootcss.com/SyntaxHighlighter/3.0.83/styles/shCoreDjango.css" rel="stylesheet">
-<!--初始化SyntaxHighlighter的必须代码，必须放在head中，引入文件之后-->
-<script type="text/javascript">SyntaxHighlighter.all();</script>
-<!--用于消除右上角的广告-->
-<script type="text/javascript">SyntaxHighlighter.defaults['toolbar'] = false;</script>

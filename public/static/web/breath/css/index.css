@@ -6291,3 +6291,71 @@ a,
 [data-tooltip][tabindex="0"][data-side="right"]::before {
 	transform: translate(-50%, 50%) rotate(135deg)
 }
+
+
+/*自制标签样式*/
+.content-title{
+	background: #fff;
+	box-shadow: 0px 5px 8px #999;
+	margin-bottom: 20px !important;
+	padding: 75px 30px 10px;
+
+}
+.content-title h2 {
+	margin: 0px;
+	font-size: 22px;
+	line-height: 48px;
+	border-bottom: 1px dotted #fff;
+	padding-left: 10px;
+	border-left: 4px solid #2175bc;
+}
+
+
+.button-content:before{
+	content:'';
+	width:20px;
+	height: 0%;
+	border: 15px solid;
+	border-color: transparent transparent transparent #2175bc;
+	position: absolute;
+	top: 0px;
+	right:-30px;
+}
+.button-content{
+	color: #fff;
+	height: 30px;
+	background-color: #2175bc;
+	font-size: small;
+	line-height: 30px;
+	text-align: center;
+	position: absolute;
+	top: 28px;
+	left: -15px;
+	min-width: 100px;
+	padding: 0px 30px;
+}
+.button-content:after{
+	content:'';
+	width:10px;
+	border: 15px solid;
+	border-color: transparent #2b4250 transparent transparent ;
+	border-top: 0;
+	left: -15px;
+	position: absolute;/*使伪元素脱离文档流，使伪元素不受div内容的影响,便于计算位置，此时after相对于div的左上角进行定位*/
+	top: 30px;
+}
+.button-content a{
+	color: #fff;
+}
+/*文字标题块属性*/
+.article-nature {
+	display: inline-block;
+	margin: 20px 15px 20px 0;
+	font-size: 12px;
+}
+.article-nature a{
+	color: inherit;
+}
+.article-nature a:hover {
+	color: #bebbaa;
+}
