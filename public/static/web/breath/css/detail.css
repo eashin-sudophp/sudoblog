@@ -275,6 +275,7 @@ textarea {
 .blog-description {
 	text-transform: none;
 	font-weight: 400;
+	margin-bottom: 0px;
 }
 
 .custom-logo {

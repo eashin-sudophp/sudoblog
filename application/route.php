@@ -28,6 +28,8 @@ Route::get('/[:page]','Index/index/', [], ['page'=>'\d+']);
 
 // 前台文章列表-标签获取
 Route::get('/tag/:tag_id','Article/tag/', [], ['tag_id'=>'\d+']);
+// 标签云单页
+Route::get('/tagcloud','Page/tagCloud/', [], []);
 
 // 前台文章列表-分类获取
 Route::get('/:cate/[:page]','Article/category/', [], ['cate'=>'((?!admin)(?!api).)+', 'page'=>'\d+']);

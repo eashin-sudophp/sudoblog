@@ -79,10 +79,8 @@ class Article extends Base
 
         $this->assign('row', ['name' => $tag_row['tag_name']]);
         $this->assign('articles', $articles->toArray()['data']);
-//        $this->assign('pagination', preg_replace("/\/?\d?(\.html)?\?page=/", '/', $articles->render()));
         $this->assign('pagination', $articles->render());
         return $this->fetch_temp('list');
     }
-
 
 }

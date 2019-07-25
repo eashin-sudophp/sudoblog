@@ -27,23 +27,9 @@
         Copyright&copy;2018. Power by
         <a href="">Eashin</a>
     </div>
-    <script type='text/javascript' src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
     <script type='text/javascript' src='{$cdn_domain}/static/web/breath/js/plugins.js'></script>
     <script type='text/javascript' src='{$domain}/static/web/breath/js/script.js'></script>
     <script type='text/javascript' src='{$domain}/static/web/breath/js/particles.js'></script>
     <script type='text/javascript' src='{$domain}/static/web/breath/js/aos.js'></script>
 </body>
-<script type="text/javascript">
-    $(function(){
-        $.each($('pre'), function(index, item){
-            var className = $(item).attr('class');
-            if (typeof(className) != 'undefined' && className.indexOf('brush:') != -1) {
-                var thisLanguage = className.match(/brush:(\S+?);/);
-                if (thisLanguage) {
-                    $(item).html('<code class="'+thisLanguage[0]+' hljs">'+$(item).html()+'</code>')
-                }
-            }
-        })
-    })
-</script>
 </html>

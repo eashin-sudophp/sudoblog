@@ -823,6 +823,7 @@ textarea {
 .blog-description {
 	text-transform: none;
 	font-weight: 400;
+	margin: 0px;
 }
 
 .custom-logo {
