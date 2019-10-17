@@ -113,6 +113,7 @@
         $domain = str_replace('https://', 'http://',request()->domain());
         if ((strpos($img_link, $domain) === false) && strpos($img_link, 'http') === 0) return $img_url;
         if (strpos($img_link, $domain)=== 0)$img_url = str_replace($domain, '', $img_link);
+        if (!file_exists('.' . $img_url)) return '';
         $image = \think\Image::open('.' . $img_url);
         $thumb_path = "./_mystorage/thumbnail/";
         $storage = $thumb_path . str_replace(array('/', '\\'),'', str_replace('.', "_$size.", $img_url));

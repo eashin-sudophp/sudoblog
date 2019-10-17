@@ -37,5 +37,5 @@ return [
 	],
     
    // 静态资源cdn加速根目录
-   'cdn_domain' => 'https://cdn.sudophp.com'
+   'cdn_domain' => 'https://www.sudophp.com'
 ];
